@@ -1,0 +1,349 @@
+<html>
+<head>
+  <title>Idle Pets</title>
+  <link type="text/css" href="styles/styles.css" rel="stylesheet">
+</head>
+<body>
+  
+  <canvas id="battleArea" width="800" height="600"></canvas>
+
+  
+  <div id="uiSections">
+    <img src="images/space-ui-background-blue.png" id="uiSectionLeft">
+    <img src="images/space-ui-background-red.png" id="uiSectionRight">
+  </div>
+  
+  <div>
+    <p id="settingsAreaNote">Settings</p>
+    <p id="tutorialAreaNote">Tutorial</p>
+    <p id="talentAreaNote">Reincarnation Tree</p>
+  
+  </div>
+  <div id="enemyInformation">
+    <div id="healthBarEnemy"></div>
+    <div id="charGold" data-title="This is the amount of gold you have aquired. Use it to acquire more minions. Obtain from defeating enemies.">GOLD: </div>  
+  </div>
+  
+  <div id="characterStats">
+    <span id="floatingGoldCount"></span>
+    <div id="charExpInfo" data-title="The amount of Experience needed to level. Try Reincarnation if this becomes too difficult">EXP: </div>
+    <div id="charLevel" data-title="Leveling does one important thing: it dictates how many RP points you receive on Reincarnation.&nbsp;&nbsp;&nbsp;&nbsp; RP Per 5 Levels:&nbsp;&nbsp;&nbsp;&nbsp; 0 - 39 :&nbsp;&nbsp;&nbsp; 1 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 40 - 99 :&nbsp; 2 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100 - 249 : 3 RP, 250 - 499 : 4 RP, 500 - 999 : 5 RP, 1000+ : 6 RP">LEVEL: </div>
+    <br>
+    <div id="charRPTotal" data-title="Total RP Points to Spend. Use the 'Reincarnation Tree' to spend your points. HINT: It may be better in the beginning to reincarnate as soon as things slow down.">RP: </div>
+    <br>
+    <div id="charDamRP" data-title="The increase in damage from Reincarnation. Spending RP does NOT reset this, so feel free to spend away!"></div>
+    
+  </div>
+  <div id="enemyStats">
+    <div id="monsterGold" data-title="Gold dropped per kill"></div>
+    <br>
+    <div id="monsterExp" data-title="Exp dropped per kill"></div>
+    <br>
+    <div id="leftToLevel" data-title="Kills in this zone"></div>
+    <br>
+    <div id="monsterLevel" data-title="Kills needed to proceed"></div>
+  </div> 
+	
+  <div id="upgradePets">  
+ 
+  </div>
+  
+  <div id="allPetStats">
+    <table id="allPetStatsTable">
+      <tr>
+        <th onclick='buySkeleton()'>
+          <div id="skeletonStats">
+          <div id="skeletonCost" class="costNoticeSkeleton">Cost: 5</div>
+          <br>
+          <div id="skeletonDamage" class="visibleOpacityBackgrounds"></div>
+          <div id="skeletonSpeed" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="skeletonDps" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="skeletonCount" class="visibleOpacityBackgrounds"></div>
+          </div>
+        </th>  
+      </tr>
+      <tr>
+        <th onclick='buyFrostGiant()'>
+         <div id="frostGiantStats">
+            <div id="frostGiantCost" class="costNotice">Cost: 125</div>  
+            <br>
+            <div id="frostGiantDamage" class="visibleOpacityBackgrounds"></div>
+            <div id="frostGiantSpeed" class="visibleOpacityBackgrounds"></div>
+            <br>
+            <div id="frostGiantDps" class="visibleOpacityBackgrounds"></div>
+            <br>
+            <div id="frostGiantCount" class="visibleOpacityBackgrounds"></div>
+          </div>       
+        </th>    
+      </tr> 
+      <tr>
+        <th onclick='buyDragonling()'>
+          <div id="dragonlingStats" class="visibleOpacityBackgrounds">
+          <div id="dragonlingCost" class="costNotice">Cost: 900</div> 
+          <br>
+          <div id="dragonlingDamage" class="visibleOpacityBackgrounds"></div>
+          <div id="dragonlingSpeed" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="dragonlingDps" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="dragonlingCount" class="visibleOpacityBackgrounds"></div>
+          </div>    
+        </th>    
+      </tr> 
+      <tr>
+        <th onclick='buyThunderSerpent()'>
+          <div id="thunderSerpentStats" class="visibleOpacityBackgrounds">
+          <div id="thunderSerpentCost" class="costNotice">Cost: 2500</div> 
+          <br>
+          <div id="thunderSerpentDamage" class="visibleOpacityBackgrounds"></div>
+          <div id="thunderSerpentSpeed" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="thunderSerpentDps" class="visibleOpacityBackgrounds"></div>
+          <br>
+          <div id="thunderSerpentCount" class="visibleOpacityBackgrounds"></div>
+          </div>    
+        </th>    
+      </tr> 
+    </table>
+   </div>
+  <div id="overallDpsMeter">
+  
+  
+  </div>
+  
+  <!-- Tooltips work well but for this section we'll be outputting notifications to a certain area -->
+  <div id="notificationArea">
+    <div id="notificationOne">UPDATE 1.05a: <br><br>  -Better balancing<br> -Updated graphics <br>-Talent tree and Reincarnation is live! Try it out to make progressing much easier! <br><br> Thank you for playing!<br><br>Important notices and information about skills will appear here</div>
+
+  </div>
+  
+  <div id="menuUpdateCharStats">
+    <table>
+      <tr>
+        <th id="skeletonTab">Skeleton</th>
+        <th id="frostGiantTab">Frost Giant</th>
+        <th id="dragonlingTab">Dragonling</th>
+        <th id="thunderSerpentTab">Thunder Serpent</th>
+      </tr>
+    </table>
+  </div>
+  
+  <!-- Enemies Graphical Locations - TODO : Finish or move on, pick one -->
+  
+  <div id="minionGraphicalArea">
+    <div id="skeletonGraphic">
+    
+    </div>
+    <div id="frostGiantGraphic">
+    
+    </div>
+    <div id="dragonlingGraphic">
+    
+    </div>
+    <div id="thunderSerpentGraphic">
+    
+    </div>
+  </div>
+  
+  <!-- Information panels : Character, Updates, Stats, etc. -->
+  
+  <div id="menuUpdatePetStats">
+  
+  </div>
+  
+  <div id="enemyFrontInterface">
+    
+  </div>
+ 
+  <div id="sideInformationLeft">
+    
+  </div>
+  
+  <div id="sideInformationRight">
+    
+  </div>
+  
+  <div id="enemyImages" class="swayEnemy">
+    <img id="enemyOne" class="swayEnemy" width="150px"> 
+    <img id="enemyDeath" class="deadEnemy hidden" width="150px">
+  </div>  
+  
+  <div id="skillIcons">
+    <div id="skeletonSkills" class="hidden">
+      <table>
+        <tr>
+          <th id="skeletonSkillOneHover" onclick='skeletonSkillFirst()'><p>10</p><img id="skeletonSkillOne"></th>
+          <th id="skeletonSkillTwoHover" onclick='skeletonSkillSecond()'><p>25</p><img id="skeletonSkillTwo"></th>
+          <th id="skeletonSkillThreeHover" onclick='skeletonSkillThird()'><p>50</p><img id="skeletonSkillThree"></th>
+        </tr>
+        <tr>
+          <th id="skeletonSkillFourHover" onclick='skeletonSkillFourth()'><br><p>100</p><img id="skeletonSkillFour"></th>
+          <th id="skeletonSkillFiveHover" onclick='skeletonSkillFifth()'><br><p>250</p><img id="skeletonSkillFive"></th>
+          <th id="skeletonSkillSixHover" onclick='skeletonSkillSixth()'><br><p>500</p><img id="skeletonSkillSix">
+          </th>
+        </tr>
+      </table>
+    </div>
+    <div id="frostGiantSkills" class="hidden">
+      <table>
+        <tr>
+          <th id="frostGiantSkillOneHover" onclick='frostGiantSkillFirst()'><p>10</p><img id="frostGiantSkillOne"></th>
+          <th id="frostGiantSkillTwoHover" onclick='frostGiantSkillSecond()'><p>25</p><img id="frostGiantSkillTwo"></th>
+          <th id="frostGiantSkillThreeHover" onclick='frostGiantSkillThird()'><p>50</p><img id="frostGiantSkillThree"></th>
+        </tr>
+        <tr>
+          <th id="frostGiantSkillFourHover" onclick='frostGiantSkillFourth()'><br><p>100</p><img id="frostGiantSkillFour"></th>
+          <th id="frostGiantSkillFiveHover" onclick='frostGiantSkillFifth()'><br><p>250</p><img id="frostGiantSkillFive"></th>
+          <th id="frostGiantSkillSixHover" onclick='frostGiantSkillSixth()'><br><p>500</p><img id="frostGiantSkillSix"></th>
+        </tr>
+      </table>
+    </div>
+    <div id="dragonlingSkills" class="hidden">
+      <table>
+        <tr>
+          <th id="dragonlingSkillOneHover" onclick='dragonlingSkillFirst()'><p>10</p><img id="dragonlingSkillOne"></th>
+          <th id="dragonlingSkillTwoHover" onclick='dragonlingSkillSecond()'><p>25</p><img id="dragonlingSkillTwo"></th>
+          <th id="dragonlingSkillThreeHover" onclick='dragonlingSkillThird()'><p>50</p><img id="dragonlingSkillThree"></th>
+        </tr>
+        <tr>
+          <th id="dragonlingSkillFourHover" onclick='dragonlingSkillFourth()'><br><p>100</p><img id="dragonlingSkillFour"></th>
+          <th id="dragonlingSkillFiveHover" onclick='dragonlingSkillFifth()'><br><p>250</p><img id="dragonlingSkillFive"></th>
+          <th id="dragonlingSkillSixHover" onclick='dragonlingSkillSixth()'><br><p>500</p><img id="dragonlingSkillSix"></th>
+        </tr>
+      </table>
+    </div>
+    <div id="thunderSerpentSkills" class="hidden">
+      <table>
+        <tr>
+          <th id="thunderSerpentSkillOneHover" onclick='thunderSerpentSkillFirst()'><p>10</p><img id="thunderSerpentSkillOne"></th>
+          <th id="thunderSerpentSkillTwoHover" onclick='thunderSerpentSkillSecond()'><p>25</p><img id="thunderSerpentSkillTwo"></th>
+          <th id="thunderSerpentSkillThreeHover" onclick='thunderSerpentSkillThird()'><p>50</p><img id="thunderSerpentSkillThree"></th>
+        </tr>
+        <tr>
+          <th id="thunderSerpentSkillFourHover" onclick='thunderSerpentSkillFourth()'><br><p>100</p><img id="thunderSerpentSkillFour"></th>
+          <th id="thunderSerpentSkillFiveHover" onclick='thunderSerpentSkillFifth()'><br><p>250</p><img id="thunderSerpentSkillFive"></th>
+          <th id="thunderSerpentSkillSixHover" onclick='thunderSerpentSkillSixth()'><br><p>500</p><img id="thunderSerpentSkillSix"></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  
+<!-- Modal window for settings, tutorial, etc -->
+  
+  <!-- Tutorial -->
+  <input onclick="checkForTutorial()" id="tmodal" type="checkbox" data-show="" data-hide=""/>
+  <div class="modal">
+    <h1>Welcome to Idle Summoner</h1>
+    <p id="tutOne" class="funBorderOne">NOTIFICATIONS - Here is information on various things, such as your minion's skill </p>
+    <p id="tutTwo" class="funBorderOne">MINIONS - Summon a variety of damaging pets. Click the pet portrait to hire another pet. HINT: Get skills as soon as possible as they add the most damage compared to pure minion count!</p>
+    <p id="tutThree" class="funBorderOne">TOOLTIPS - If you aren't quite sure what something does, try hovering over it and reading the text to get valuable information!</p>
+    <p id="tutFour" class="funBorderOne">YOUR STATS - Here is general information about you and your pets.</p>
+    <p id="tutFive" class="funBorderOne">ENEMY STATS - Here is general information about your enemy.</p>
+    <p id="tutSix" class="important">IMPORTANT - Reincarnation - Every 5 levels gives you one RP (Reincarnation Point) AFTER you use Reincarnation <br><br> Use RP in the Reincarnation Tree to improve your minions (UPDATES COMING SOON!) <br><br> Reincarnation is available in the settings menu and will reset all of your minions, enemies, and stats EXCEPT RP and RP talents.</p>
+  </div>
+  
+  <!-- Talents -->
+  <input onclick="checkForTalents()" id="tmodalTalents" type="checkbox" data-show="" data-hide=""/>
+  
+  <div class="modalTalents">
+    <div id="talentWrapper">
+      <div id="reincarnationPointsSection">
+        <div id="tierOneRP" data-title="Aquire at least 1 RP point to activate this tier">1</div >
+        <div id="tierTwoRP" data-title="Aquire at least 25 RP points to activate this tier">25</div>
+        <div id="tierThreeRP" data-title="Aquire at least 125 points to activate this tier">125</div>
+        <div id="tierFourRP" data-title="Aquire at least 1k RP points to activate this tier">1k</div>
+        <div id="tierFiveRP" data-title="Aquire at least 5k RP points to activate this tier">5k</div>
+        <div id="tierSixRP" data-title="Aquireat least 15k RP points to activate this tier">15k</div>
+      </div>
+      <div id="talentOneOne" class="buttonTypeTwo RPHover" onclick='talentOneOne()' data-title=
+           "Increase Base Skeleton Damage"></div>
+      <div id="talentOneTwo" class="buttonTypeTwo RPHover" onclick='talentOneTwo()' data-title=
+           "Decreases Base Skeleton time between attacks"></div>
+      <div id="talentOneThree" class="buttonTypeTwo RPHover" onclick='talentOneThree()' data-title=
+           "KEY TALENT: Increases your overall RP gain"></div>
+      
+      <div id="talentTwoOne" class="buttonTypeThree RPHover" onclick='talentOneFour()' data-title=
+           "Increase Base Frost Giant Damage"></div>
+      <div id="talentTwoTwo" class="buttonTypeThree RPHover" onclick='talentOneFive()' data-title=
+           "Increase Base Frost Giant Damage"></div> 
+      <div id="talentTwoThree" class="buttonTypeThree RPHover" onclick='talentOneSix()' data-title=
+           "KEY TALENT: Increases your overall gold gain by a percentage"></div>
+      
+      <div id="talentThreeOne" class="buttonTypeFour RPHover" onclick='talentOneSeven()' data-title=
+           "Increase Base Dragonling Damage"></div>
+      <div id="talentThreeTwo" class="buttonTypeFour RPHover" onclick='talentOneEight()' data-title=
+           "Increase Base Dragonling Damage"></div>
+      <div id="talentThreeThree" class="buttonTypeFour RPHover" onclick='talentOneNine()' data-title=
+           "KEY TALENT: Increases your overall EXP gain by a percentage"></div>
+      
+      <div id="talentFourOne" class="buttonTypeFive RPHover" onclick='talentOneTen()' data-title=
+           "Increase Base Thunder Serpent Damage"></div>
+      <div id="talentFourTwo" class="buttonTypeFive RPHover" onclick='talentOneEleven()' data-title=
+           "Increase Base Thunder Serpent Damage"></div>
+      <div id="talentFourThree" class="buttonTypeFive RPHover" onclick='talentOneTwelve()' data-title=
+           "KEY TALENT: Reduces the amount of enemies needed to kill to move to the next level"></div>
+      
+      <div id="talentFiveOne" class="buttonTypeSix RPHover" onclick='talentOneThirteen()' data-title=
+           "KEY TALENT: "></div>
+      <div id="talentFiveTwo" class="buttonTypeSix RPHover" onclick='talentOneFourteen()' data-title=
+           "KEY TALENT: "></div>
+      
+      <div id="talentSixOne" class="buttonTypeSeven RPHover" onclick='talentOneFifteen()' data-title=
+           ""></div>
+    </div> 
+  </div>
+  
+  <!-- Settings -->
+  <input onclick="checkForSettings()" id="tmodalSettings" type="checkbox" data-show="" data-hide=""/>
+  <div class="modalSettings">
+    <h1>Settings Menu</h1>
+    <h1 id="setOne">Save, Load, and Reset Your Game</h1>
+    <br><br><br><br><br><br><br>
+    <h1 id="setTwo">Credits</h1>
+    <p id="setThree">Programming and Developed By: <br> Charles Jones, <a href="http://charlesjones.me/" target="_blank">My Site</a> <br><br> \Art/Graphics: <br> Charles Jones, and Opengameart.org, I'm glad you exist to supplement my art "skills". Specific attribution to: <br> Zeyu Ren 任泽宇, LordNeo, J. W. Bjerk (eleazzaar)<br><br><p>Special thanks to beta testers <!--TODO: Add beta testers to thank you list--></p>
+    <!-- Save / Load System - TODO: RESET BUTTOn -->
+      <div id="saveAndLoad">
+        <button id="saveGameButton" class="buttonTypeOne" type='button' onclick='saveGame()'>Save</button>
+        <button id="loadGameButton" class="buttonTypeOne" type='button' onclick='loadGame()'>Load</button>
+        <button id="resetGameButton" class="buttonTypeOne" type='button' onclick='resetGame()'>Reset(n/a)</button>
+        <br>
+        <br>
+        <p data-title="Resets everything back to zero except Reincarnation Points (RP). Use RP to increase various stats and make fighting enemies easier." id="reincarStart" onclick='reincarnation()'><span>Reincarnation</span><br><span id="reincarnation">0 <br> RP Gain</span></p>
+      </div>
+  </div>  
+	
+  
+	
+	
+<!-- Front of Pet Card; features information on the pet -->
+  <div id="petToggleSkillsFront">
+    <button type="button" id="toggleSkeletonSkillsFront">View Skills</button>
+    <button type="button" id="toggleFrostGiantSkillsFront">View Skills</button>
+    <button type="button" id="toggleDragonlingSkillsFront">View Skills</button>
+    <button type="button" id="toggleThunderSerpentSkillsFront">View Skills</button>
+  </div>
+
+<!--Back of the Pet Card; features the skill system -->  
+  <div id="petToggleSkillsBack">
+    <button type="button" id="toggleSkeletonSkillsBack" class="hidden">View Stats</button>
+    <button type="button" id="toggleFrostGiantSkillsBack" class="hidden">View Stats</button>
+    <button type="button" id="toggleDragonlingSkillsBack" class="hidden">View Stats</button>
+    <button type="button" id="toggleThunderSerpentSkillsBack" class="hidden">View Stats</button>
+  </div>
+
+<!--Floating Combat and Gold Text-->
+  <div id="floatingStuffArea">
+    <div id="floatingSkeletonDamage"></div>
+    <div id="floatingFrostGiantDamage"></div>
+    <div id="floatingDragonlingDamage"></div>
+    <div id="floatingThunderSerpentDamage"></div>
+    <div id="floatingGoldText"></div>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="scripts/main.js"></script>
+</body>
+</html>
