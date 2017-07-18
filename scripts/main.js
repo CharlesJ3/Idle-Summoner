@@ -672,6 +672,8 @@ let frostGiantSkillFirst = function(){
   }
 }
 
+console.log('test');
+
 let frostGiantSkillSecond = function(){
 
   if(FrostGiant.count >= 25 && FrostGiant.skill2 !== 1){
@@ -684,7 +686,7 @@ let frostGiantSkillSecond = function(){
   }
 }
 
-
+ q
 let frostGiantSkillThird = function(){
 
   if(FrostGiant.count >= 50 && FrostGiant.skill3 !== 1){
