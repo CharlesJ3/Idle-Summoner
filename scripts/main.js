@@ -1831,15 +1831,6 @@ let talentTreeInitialDescriptions = function(){
     "<p class='talentTitle'>Decrease Kills Needed : <br>" + player.bonusRPTalentTwelve + " / " + player.bonusRPTalentTwelveMax + "<br><span>" + enemy.toNextLevelMax + " Kills needed." + "<br> Cost: " + player.bonusRPTalentTwelveCost +"</span></p>"
   );
   
-  $("#talentFiveOne").html(
-    ""
-  );
-  $("#talentFiveTwo").html(
-    ""
-  );
-  $("#talentSixOne").html(
-    ""
-  );
 }
 
 talentTreeInitialDescriptions();

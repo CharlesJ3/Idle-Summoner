@@ -72,7 +72,7 @@ a[data-title]:hover:after, p[data-title]:hover:after, div[data-title]:hover:afte
   left: 0;
   top: 55%;
   width: 125px;
-  float:left;
+  float: left;
   z-index: 20;
   border: 2px solid red;
   -moz-box-shadow: 0px 0px 4px #222;
@@ -208,7 +208,7 @@ body{
   position: absolute;
   color: white;    
   width: 122px;
-  background-image: url('https://www.filepicker.io/api/file/9i04pOgR2OeXxfPupxHg');
+  background-image: url('../images/dragon-base-image.png');
   background-size: cover;
   background-clip: border-box;
   background-position: center center;
@@ -567,7 +567,6 @@ body{
   border: 2px solid white;
   background-position: center center;
   background-size: cover;
-	overflow-y: scroll;  
 }
 
 th img {
@@ -1110,6 +1109,7 @@ th img {
 }
 
 #talentFiveOne{
+	display: none;
   position: absolute;
   top: 89px;
   left: 231px;
@@ -1118,6 +1118,7 @@ th img {
 }
 
 #talentFiveTwo{
+	display: none;
   position: absolute;
   top: 89px;
   left: 422px;
@@ -1126,6 +1127,7 @@ th img {
 }
 
 #talentSixOne{
+	display: none;
   position: absolute;
   top: 92px;
   left: 519px;
@@ -1275,7 +1277,11 @@ th img {
      1px 1px 0 darkorange;   
 }
 
+
+
 #reincarnationPointsSection {
+	/*Note: This has been rendered redundant for now */
+	display: none;
   color: red;
   font-family: Bangers;
   font-weight: bold;
