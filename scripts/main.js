@@ -684,7 +684,7 @@ let frostGiantSkillSecond = function(){
   }
 }
 
- q
+
 let frostGiantSkillThird = function(){
 
   if(FrostGiant.count >= 50 && FrostGiant.skill3 !== 1){
