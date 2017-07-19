@@ -2747,7 +2747,7 @@ let setThunderSerpentInitialCost = function(){
 let checkForNextRP = function(){
   let checkForLevel = player.level % 5;
   
-  if (checkForLevel === 0 && player.level > 0 && player.level < 39	){
+  if (checkForLevel === 0 && player.level > 14 && player.level < 39	){
     player.nextReincarPoints = player.nextReincarPoints + (1 * player.bonusRPCount);
   }
   
