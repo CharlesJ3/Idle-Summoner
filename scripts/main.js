@@ -1,10 +1,10 @@
-//Load jQueryUI CSS
+/*Load jQueryUI CSS
   $("<link/>", {
    rel: "stylesheet",
    type: "text/css",
    href: "http://www.charlesjones.me/sites/default/files/game/css/jquery-ui.css"
 }).appendTo("head");
-
+*/
 /*
 *
 * Quick Index 
@@ -85,7 +85,7 @@ drawBorders();
 //Character Object, just need one for now
 let player = {
   totalPets: 0, //TODO - Bonuses based on current pets
-  gold: 27,  //TODO - General - Balancing Issues with Starting Gold 
+  gold: 2700000000000,  //TODO - General - Balancing Issues with Starting Gold 
 	goldBonusCount: 1.00,
   level: 1,  //TODO - Talent/Skill points for pets
   exp: 1,  
@@ -145,6 +145,7 @@ let player = {
   bonusRPTalentFifteen: 0,
   bonusRPTalentFifteenMax: 25,
   bonusRPTalentFifteenCost: 10,
+	costMultiplier: 10
 }
 
 //Pet Object, TODO: Possibly more pet properties that deal with modifiers (such as poison, crit, etc.)
@@ -188,15 +189,19 @@ let enemy = {
 let Skeleton = new pet('Skeleton', 1, 1.5, "Normal", 1750, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0);
 
 let buySkeleton = function(){  
-  
-  //Check for gold cost
-  if(player.gold >= Skeleton.cost){  
+
+  for(let x = 0; x < player.costMultiplier; x++){
+
+    //Initial check for gold cost. If the gold doesn't match the cost, then exit the conditional statement
+    if(player.gold <= Skeleton.cost){ 
+      break; 
+    }
 
     //Set a ceiling for the cost
     player.gold -= Math.ceil(Skeleton.cost);
     Skeleton.count++;
     player.totalPets++;
-    
+
     //We set some individual costs here based on testing.
     //Adjust cost values to change difficulty as you level
     if(Skeleton.count > 0 && Skeleton.count < 10){
@@ -207,12 +212,11 @@ let buySkeleton = function(){
     }
     if(Skeleton.count >= 50){
       Skeleton.cost = Skeleton.cost * 1.10;
-    }
-    
-    document.getElementById('skeletonCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Skeleton.cost).toFixed(0));
-    
-    showSkeletonGraphic();
+      }
   }
+    
+    //Wait until conditional finishes so 
+    document.getElementById('skeletonCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Skeleton.cost).toFixed(0));
 }
 
 /* Auto Attack System */
@@ -268,21 +272,30 @@ let FrostGiant = new pet('Frost Giant', 1, 7, "Frost", 2500, 0, 125, 0, 0, 0, 0,
 
 let buyFrostGiant = function(){  
 
-  if(player.gold >= FrostGiant.cost){    
+  for(let x = 0; x < player.costMultiplier; x++){
 
-    player.gold -= FrostGiant.cost;
+    //Initial check for gold cost. If the gold doesn't match the cost, then exit the conditional statement
+    if(player.gold <= FrostGiant.cost){ 
+      break; 
+    }
+
+    //Set a ceiling for the cost
+    player.gold -= Math.ceil(FrostGiant.cost);
     FrostGiant.count++;
     player.totalPets++;
-    if(FrostGiant.count < 50){
-      FrostGiant.cost *= 1.20;
+
+    //We set some individual costs here based on testing.
+    //Adjust cost values to change difficulty as you level
+    if(FrostGiant.count > 0 && FrostGiant.count < 50){
+      FrostGiant.cost = FrostGiant.cost * 1.20;
     }
     if(FrostGiant.count >= 50){
-      FrostGiant.cost *= 1.10;
-    }
-    document.getElementById('frostGiantCost').innerHTML = "Cost: " + nFormatter(Math.ceil(FrostGiant.cost).toFixed(0));
-    
-    showFrostGiantGraphic();
+      FrostGiant.cost = FrostGiant.cost * 1.10;
+      }
   }
+    
+    //Wait until conditional finishes so 
+    document.getElementById('frostGiantCost').innerHTML = "Cost: " + nFormatter(Math.ceil(FrostGiant.cost).toFixed(0));
 }
 
 let autoattackFrostGiant = function(){
@@ -324,20 +337,31 @@ setTimeout(autoattackFrostGiant, 100);
 let Dragonling = new pet('Dragonling', 2500, 22, "Fire", 2800, 0, 900, 0, 0, 0, 0, 0, 0, 0, 0);
 
 let buyDragonling = function(){    
-  if(player.gold >= Dragonling.cost){    
-    player.gold -= Dragonling.cost;
+
+  for(let x = 0; x < player.costMultiplier; x++){
+
+    //Initial check for gold cost. If the gold doesn't match the cost, then exit the conditional statement
+    if(player.gold <= Dragonling.cost){ 
+      break; 
+    }
+
+    //Set a ceiling for the cost
+    player.gold -= Math.ceil(Dragonling.cost);
     Dragonling.count++;
     player.totalPets++;
-    if(Dragonling.count < 50){
-      Dragonling.cost *= 1.20;
+
+    //We set some individual costs here based on testing.
+    //Adjust cost values to change difficulty as you level
+    if(Dragonling.count > 0 && Dragonling.count < 50){
+      Dragonling.cost = Dragonling.cost * 1.20;
     }
     if(Dragonling.count >= 50){
-      Dragonling.cost *= 1.10;
-    }
-    document.getElementById('dragonlingCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Dragonling.cost).toFixed(0));
-    
-    showDragonlingGraphic();
+      Dragonling.cost = Dragonling.cost * 1.10;
+      }
   }
+    
+    //Wait until conditional finishes so 
+    document.getElementById('dragonlingCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Dragonling.cost).toFixed(0));
 }
 
 let autoattackDragonling = function(){
@@ -381,21 +405,31 @@ setTimeout(autoattackDragonling, 100);
 let ThunderSerpent = new pet('Thunder Serpent', 1, 19, "Thunder", 1700, 0, 2500, 0, 0, 0, 0, 0, 0, 0, 0);
 
 let buyThunderSerpent = function(){    
-  if(player.gold >= ThunderSerpent.cost){    
 
-    player.gold -= ThunderSerpent.cost;
+  for(let x = 0; x < player.costMultiplier; x++){
+
+    //Initial check for gold cost. If the gold doesn't match the cost, then exit the conditional statement
+    if(player.gold <= ThunderSerpent.cost){ 
+      break; 
+    }
+
+    //Set a ceiling for the cost
+    player.gold -= Math.ceil(ThunderSerpent.cost);
     ThunderSerpent.count++;
     player.totalPets++;
-    if(ThunderSerpent.count < 50){
-      ThunderSerpent.cost *= 1.25;
+
+    //We set some individual costs here based on testing.
+    //Adjust cost values to change difficulty as you level
+    if(ThunderSerpent.count > 0 && ThunderSerpent.count < 50){
+      ThunderSerpent.cost = ThunderSerpent.cost * 1.20;
     }
     if(ThunderSerpent.count >= 50){
-      ThunderSerpent.cost *= 1.10;
-    }
-    document.getElementById('thunderSerpentCost').innerHTML = "Cost: " + nFormatter(Math.ceil(ThunderSerpent.cost).toFixed(0));
-    
-    showThunderSerpentGraphic();
+      ThunderSerpent.cost = ThunderSerpent.cost * 1.10;
+      }
   }
+    
+    //Wait until conditional finishes so 
+    document.getElementById('thunderSerpentCost').innerHTML = "Cost: " + nFormatter(Math.ceil(ThunderSerpent.cost).toFixed(0));
 }
 
 
@@ -2806,6 +2840,34 @@ let checkNextRP = function(){
   document.getElementById("reincarnation").innerHTML = player.nextReincarPoints + " RP Gain";
 }
 
+
+/*
+*
+* Cost and Level Multiplier - Purchasing Multiple Minions
+*
+*/
+
+let costMultiplyOne = function(){
+  player.costMultiplier = 1;
+  document.getElementById("costMultiplierOne").style.borderColor = "#f42";
+  document.getElementById("costMultiplierOne").style.color = "#f42";
+}
+
+let costMultiplyTwo = function(){
+  player.costMultiplier = 10;  
+}
+
+let costMultiplyThree = function(){
+  player.costMultiplier = 25;  
+}
+
+let costMultiplyFour = function(){
+  player.costMultiplier = 100; 
+}
+
+let costMultiplyFive = function(){
+  player.costMultiplier = 1000;  
+}
 
 
 //TODO - Credit Section (links below)

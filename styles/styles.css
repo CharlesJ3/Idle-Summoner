@@ -8,6 +8,12 @@
   100% { transform: translateX(10px);}
 }
 
+@keyframes moveBackgroundSlow {
+    0% { transform: translateX(10px);}
+   50% { transform: translateX(-10px);}
+  100% { transform: translateX(10px);} 
+}
+
 @keyframes randomEnemyMovementUp {
     0% { transform: translateY(5px);}
    50% { transform: translateY(-10px);}
@@ -145,6 +151,29 @@ body{
   background-color: white;
   color: red; 
 }
+
+.buttonCostMultiplier{
+  font-size: 11px;
+  text-align: center; 
+  border-radius: 10%;
+  background-color: lightsteelblue;
+  color: black;
+  border: 1px solid black;
+}
+
+.buttonCostMultiplier:hover{
+  background-color: white;
+  color: red; 
+  border: 1px solid red;
+}
+
+.buttonCostMultiplier:active{
+  background-color: red;
+  color: white; 
+  border: 1px solid white;
+}
+
+
 
 /*Stats, Updates, Purchases*/
 #characterStats{
@@ -1328,6 +1357,7 @@ th img {
   left: 3px;
   width: 146px;
   height: 314px;
+  overflow: hidden;
 }
 
 #uiSectionRight{
@@ -1336,4 +1366,41 @@ th img {
   left: 651px;
   width: 146px;
   height: 314px;
+}
+
+#costMultiplierOne, #costMultiplierTwo, #costMultiplierThree, #costMultiplierFour, #costMultiplierFive{
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+}
+
+#costMultiplierOne{
+  position: absolute;
+  top: 280px;
+  left: 160px;
+}
+
+#costMultiplierTwo{
+  position: absolute;
+  top: 280px;
+  left: 195px;
+}
+
+#costMultiplierThree{
+  position: absolute;
+  top: 280px;
+  left: 230px;
+}
+
+#costMultiplierFour{
+  position: absolute;
+  position: absolute;
+  top: 280px;
+  left: 265px;
+}
+
+#costMultiplierFive{
+  position: absolute;
+  top: 280px;
+  left: 300px;
 }
