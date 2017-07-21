@@ -938,9 +938,21 @@ th img {
 }
 
 #reincarStart{
-  top: 50px;
-  left: 125px;
+  font-size: 22px;
+  font-family: Bangers, Times New Roman;
+  top: -8px;
+  left: 290px;
   position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  color: red;
+  width: 200px;
+  height: 70px;
+  text-shadow:
+   -1px -1px 0 black,  
+    1px -1px 0 black,
+    -1px 1px 0 black,
+     1px 1px 0 black; 
 }
 
 #talentWrapper{
@@ -990,21 +1002,21 @@ th img {
 
 #talentOneOne{
   position: absolute;
-  top: 452px;
-  left: 140px;
+  top: 421px;
+  left: 72px;
   vertical-align: top;
 }
 
 #talentOneTwo{
   position: absolute;
-  top: 452px;
-  left: 328px;
+  top: 421px;
+  left: 304px;
 }
 
 #talentOneThree{
   position: absolute;
-  top: 452px;
-  left: 519px;
+  top: 421px;
+  left: 534px;
 }
 
 
@@ -1028,20 +1040,20 @@ th img {
 
 #talentTwoOne{
   position: absolute;
-  top: 358px;
-  left: 140px;
+  top: 321px;
+  left: 72px;
 }
 
 #talentTwoTwo{
   position: absolute;
-  top: 358px;
-  left: 328px;
+  top: 321px;
+  left: 304px;
 }
 
 #talentTwoThree{
   position: absolute;
-  top: 358px;
-  left: 519px;
+  top: 321px;
+  left: 534px;
 }
 
 
@@ -1065,20 +1077,20 @@ th img {
 
 #talentThreeOne{
   position: absolute;
-  top: 260px;
-  left: 140px;
+  top: 221px;
+  left: 72px;
 }
 
 #talentThreeTwo{
   position: absolute;
-  top: 260px;
-  left: 328px;
+  top: 221px;
+  left: 304px;
 }
 
 #talentThreeThree{
   position: absolute;
-  top: 260px;
-  left: 519px;
+  top: 221px;
+  left: 534px;
 }
 
 
@@ -1103,106 +1115,22 @@ th img {
 
 #talentFourOne{
   position: absolute;
-  top: 171px;
-  left: 138px;
+  top: 121px;
+  left: 72px;
 }
 
 #talentFourTwo{
   position: absolute;
-  top: 171px;
-  left: 329px;
+  top: 121px;
+  left: 304px;
 }
 
 #talentFourThree{
   position: absolute;
-  top: 171px;
-  left: 517px;
+  top: 121px;
+  left: 534px;
 }
 
-
-
-/*Tier Five*/
-.buttonTypeSix{
-  width: 178px;
-  color: white;
-  height: 76px;
-  font-size: 15px;
-  background: -moz-radial-gradient(center, ellipse cover, rgba(104,67,21,1) 0%, rgba(104,67,21,1) 62%, rgba(104,67,21,0.75) 67%, rgba(108,72,27,0.7) 68%, rgba(229,229,229,0) 100%);
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(104,67,21,1) 0%,rgba(104,67,21,1) 62%,rgba(104,67,21,0.75) 67%,rgba(108,72,27,0.7) 68%,rgba(229,229,229,0) 100%);
-  background: radial-gradient(ellipse at center, rgba(104,67,21,1) 0%,rgba(104,67,21,1) 62%,rgba(104,67,21,0.75) 67%,rgba(108,72,27,0.7) 68%,rgba(229,229,229,0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#684315', endColorstr='#00e5e5e5',GradientType=1 );
-    text-shadow:
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-    -1px 1px 0 black,
-     1px 1px 0 black; 
-}
-
-#talentFiveOne{
-	display: none;
-  position: absolute;
-  top: 89px;
-  left: 231px;
-	background-image: url('../images/coming_soon.png');
-	background-size: cover;
-}
-
-#talentFiveTwo{
-	display: none;
-  position: absolute;
-  top: 89px;
-  left: 422px;
-	background-image: url('../images/coming_soon.png');
-	background-size: cover;
-}
-
-#talentSixOne{
-	display: none;
-  position: absolute;
-  top: 92px;
-  left: 519px;
-	background-image: url('../images/coming_soon.png');
-	background-size: cover;
-}
-
-
-
-
-/*Tier Six*/
-.buttonTypeSeven{
-  color: white;
-  width: 137px;
-  height: 57px;
-  font-size: 15px;
-  background: rgb(10,14,10);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(10,14,10,1) 19%, rgba(10,14,10,1) 41%, rgba(110,119,116,1) 85%, rgba(110,119,116,1) 92%);
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(10,14,10,1) 19%,rgba(10,14,10,1) 41%,rgba(110,119,116,1) 85%,rgba(110,119,116,1) 92%);
-  background: radial-gradient(ellipse at center, rgba(10,14,10,1) 19%,rgba(10,14,10,1) 41%,rgba(110,119,116,1) 85%,rgba(110,119,116,1) 92%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a0e0a', endColorstr='#6e7774',GradientType=1 );
-  text-shadow:
-   -1px -1px 0 black,  
-    1px -1px 0 black,
-    -1px 1px 0 black,
-     1px 1px 0 black;   
-}
-
-#talentSixOne{
-  position: absolute;
-  top: 10px;
-  left: 329px;
-}
-
-#talentSixTwo{
-  position: absolute;
-  top: 10px;
-  left: 328px;
-}
-
-#talentSixThree{
-  position: absolute;
-  top: 10px;
-  left: 519px;
-}
 
 
 
@@ -1307,7 +1235,12 @@ th img {
      1px 1px 0 darkorange;   
 }
 
-
+#reincarnation{
+  width: 200px;
+  background-color: white;
+  color: red;
+  
+}
 
 #reincarnationPointsSection {
 	/*Note: This has been rendered redundant for now */
@@ -1321,7 +1254,6 @@ th img {
   width: 100px;
   height: 542px;
   overflow: hidden;
-  text-shadow:
 }
 
 #floatingGoldText{
@@ -1376,31 +1308,50 @@ th img {
 
 #costMultiplierOne{
   position: absolute;
-  top: 280px;
-  left: 160px;
+  top: 285px;
+  left: 470px;
+  border: 1px solid red;
+  color: red;
 }
 
 #costMultiplierTwo{
   position: absolute;
-  top: 280px;
-  left: 195px;
+  top: 285px;
+  left: 505px;
 }
 
 #costMultiplierThree{
   position: absolute;
-  top: 280px;
-  left: 230px;
+  top: 285px;
+  left: 540px;
 }
 
 #costMultiplierFour{
   position: absolute;
-  position: absolute;
-  top: 280px;
-  left: 265px;
+  top: 285px;
+  left: 575px;
 }
 
 #costMultiplierFive{
   position: absolute;
-  top: 280px;
-  left: 300px;
+  top: 285px;
+  left: 610px;
+}
+  
+#totalRPCount{
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+
+#totalOverallRPCount{
+  position: absolute; 
+  top: 35px;
+  left: 20px;
+}
+
+#resetRP{
+  position: absolute;
+  top: 65px;
+  left: 20px;
 }

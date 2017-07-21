@@ -85,7 +85,7 @@ drawBorders();
 //Character Object, just need one for now
 let player = {
   totalPets: 0, //TODO - Bonuses based on current pets
-  gold: 2700000000000,  //TODO - General - Balancing Issues with Starting Gold 
+  gold: 28,  //TODO - General - Balancing Issues with Starting Gold 
 	goldBonusCount: 1.00,
   level: 1,  //TODO - Talent/Skill points for pets
   exp: 1,  
@@ -101,7 +101,7 @@ let player = {
   /*RP Talent Properties - Helps set current, max allowable, and cost for the talent tree*/
   
   bonusRPTalentOne: 0,						//Skeleton Damage
-  bonusRPTalentOneMax: 15000,			//Skeleton Speed
+  bonusRPTalentOneMax: 1500,			//Skeleton Speed
   bonusRPTalentOneCost: 1,				//Skeleton Special, rinse/repeat this until Talent 15
   bonusRPTalentTwo: 0,
   bonusRPTalentTwoMax: 25,
@@ -110,8 +110,8 @@ let player = {
   bonusRPTalentThreeMax: 3,
   bonusRPTalentThreeCost: 10,
   bonusRPTalentFour: 0,
-  bonusRPTalentFourMax: 15000,
-  bonusRPTalentFourCost: 10,
+  bonusRPTalentFourMax: 1500,
+  bonusRPTalentFourCost: 1,
   bonusRPTalentFive: 0,
   bonusRPTalentFiveMax: 10,
   bonusRPTalentFiveCost: 1,
@@ -119,20 +119,20 @@ let player = {
   bonusRPTalentSixMax: 25,
   bonusRPTalentSixCost: 1,
   bonusRPTalentSeven: 0,
-  bonusRPTalentSevenMax: 15000,
-  bonusRPTalentSevenCost: 10,
+  bonusRPTalentSevenMax: 1500,
+  bonusRPTalentSevenCost: 1,
   bonusRPTalentEight: 0,
   bonusRPTalentEightMax: 25,
-  bonusRPTalentEightCost: 10,
+  bonusRPTalentEightCost: 1,
   bonusRPTalentNine: 0,
   bonusRPTalentNineMax: 25,
   bonusRPTalentNineCost: 1,
   bonusRPTalentTen: 0,
-  bonusRPTalentTenMax: 15000,
+  bonusRPTalentTenMax: 1500,
   bonusRPTalentTenCost: 1,
   bonusRPTalentEleven: 0,
   bonusRPTalentElevenMax: 25,
-  bonusRPTalentElevenCost: 10,
+  bonusRPTalentElevenCost: 1,
   bonusRPTalentTwelve: 0,
   bonusRPTalentTwelveMax: 5,
   bonusRPTalentTwelveCost: 10,
@@ -145,7 +145,7 @@ let player = {
   bonusRPTalentFifteen: 0,
   bonusRPTalentFifteenMax: 25,
   bonusRPTalentFifteenCost: 10,
-	costMultiplier: 10
+	costMultiplier: 1
 }
 
 //Pet Object, TODO: Possibly more pet properties that deal with modifiers (such as poison, crit, etc.)
@@ -215,7 +215,8 @@ let buySkeleton = function(){
       }
   }
     
-    //Wait until conditional finishes so 
+    //Wait until conditional finishes 
+    showSkeletonGraphic();
     document.getElementById('skeletonCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Skeleton.cost).toFixed(0));
 }
 
@@ -294,7 +295,8 @@ let buyFrostGiant = function(){
       }
   }
     
-    //Wait until conditional finishes so 
+    //Wait until conditional finishes
+    showFrostGiantGraphic();
     document.getElementById('frostGiantCost').innerHTML = "Cost: " + nFormatter(Math.ceil(FrostGiant.cost).toFixed(0));
 }
 
@@ -360,7 +362,8 @@ let buyDragonling = function(){
       }
   }
     
-    //Wait until conditional finishes so 
+    //Wait until conditional finishes
+    showDragonlingGraphic();
     document.getElementById('dragonlingCost').innerHTML = "Cost: " + nFormatter(Math.ceil(Dragonling.cost).toFixed(0));
 }
 
@@ -428,7 +431,8 @@ let buyThunderSerpent = function(){
       }
   }
     
-    //Wait until conditional finishes so 
+    //Wait until conditional finishes
+    showThunderSerpentGraphic();
     document.getElementById('thunderSerpentCost').innerHTML = "Cost: " + nFormatter(Math.ceil(ThunderSerpent.cost).toFixed(0));
 }
 
@@ -496,21 +500,32 @@ let enemyLevelSystem = function(){
 
 let enemyBackground = function(){
 
-  if(enemy.level < 10){
+  if(enemy.level < 2){
     document.getElementById("enemyOne").src="http://charlesjones.me/sites/default/files/images/orc.png";
   }
-  else if(enemy.level < 11){
-    document.getElementById("enemyOne").src="images/orc_stone.png";
+  else if(enemy.level < 5){
+    document.getElementById("enemyOne").src="images/BanditBeigeGold.png";
   }
-  else if(enemy.level < 21){
+  else if(enemy.level < 9){
     document.getElementById("enemyOne").src="images/orc_zumbi.png";
   }
-  else if(enemy.level < 31){
+  else if(enemy.level < 14){
+    document.getElementById("enemyOne").src="images/BanditWhiteGrey.png";
+  }
+  else if(enemy.level < 19){
+    document.getElementById("enemyOne").src="images/orc_stone.png";
+  }
+  else if(enemy.level < 24){
+    document.getElementById("enemyOne").src="images/BanditBlueDarkBlue.png";
+  }
+  else if(enemy.level < 29){
     document.getElementById("enemyOne").src="images/orc_zumbi_2.png";
   }
-  else if(enemy.level < 41){
-    document.getElementById("enemyOne").src="images/orc_hig.png";
-    document.getElementById("enemyDeath").src="images/orc_hig.png";
+  else if(enemy.level < 34){
+    document.getElementById("enemyOne").src="images/BanditBlackRed.png";
+  }
+  else if(enemy.level < 39){
+    document.getElementById("enemyOne").src="images/orc_hig.png";//dup
   }
   
 
@@ -657,7 +672,7 @@ let skeletonSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    Skeleton.damage *= 5;
+    Skeleton.damage *= 20;
     Skeleton.speed *= .75;
   }
 }
@@ -739,7 +754,7 @@ let frostGiantSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    FrostGiant.damage *= 5;
+    FrostGiant.damage *= 15;
     FrostGiant.speed *= .35;
   }
 }
@@ -820,7 +835,7 @@ let dragonlingSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    Dragonling.damage *= 8;
+    Dragonling.damage *= 13;
     Dragonling.speed *= .70;
   }
 }
@@ -1322,11 +1337,11 @@ let helpNegativeGold = function(){
 
 let showStats = function(){
   //Player
-  document.getElementById('charGold').innerHTML = "Gold: <br>" + nFormatter(helpNegativeGold());  
+  document.getElementById('charGold').innerHTML = "Gold <br>" + nFormatter(helpNegativeGold());  
   document.getElementById('charLevel').innerHTML = "Level: " + nFormatter(player.level);    
   document.getElementById('charRPTotal').innerHTML = "RP: " + nFormatter(player.reincarPoints);
   document.getElementById('charDamRP').innerHTML = "RP x: " + nFormatter((player.damageIncreaseRP).toFixed(2));
-  document.getElementById('charExpInfo').innerHTML = "EXP: " + nFormatter((player.exp).toFixed(2)) + " / " + nFormatter(Math.ceil(player.maxXp).toFixed(0));
+  document.getElementById('charExpInfo').innerHTML = "EXP: " + nFormatter((player.exp).toFixed(2)) + " / " + nFormatter(Math.ceil(player.maxXp));
 
   //Skeleton     
   document.getElementById('skeletonDamage').innerHTML = "Damage: <br>" + nFormatter(((Skeleton.damage + Skeleton.addDam)*player.damageIncreaseRP).toFixed(2));    
@@ -1355,10 +1370,12 @@ let showStats = function(){
   //Overall Damage
   document.getElementById('overallDpsMeter').innerHTML = "DPS: <br>" + nFormatter((player.damageIncreaseRP *((((Skeleton.damage + Skeleton.addDam) / ((Skeleton.speed - Skeleton.addSpeed) / 1000)) * Skeleton.count) + (((FrostGiant.damage + FrostGiant.addDam) / ((FrostGiant.speed - FrostGiant.addSpeed) / 1000)) * FrostGiant.count) + (((Dragonling.damage + Dragonling.addDam) / ((Dragonling.speed - Dragonling.addSpeed) / 1000)) * Dragonling.count) + (((ThunderSerpent.damage + ThunderSerpent.addDam) / ((ThunderSerpent.speed - ThunderSerpent.addSpeed) / 1000)) * ThunderSerpent.count))).toFixed(2));      
 
-  document.getElementById('monsterGold').innerHTML = "Bounty:<br> " + nFormatter((((enemy.monsterGold)) * player.goldBonusCount).toFixed(2))  + " Gold";
-  document.getElementById('monsterExp').innerHTML = "Worth:<br> " + nFormatter(((enemy.exp) * player.expBonusCount).toFixed(2)) + " XP";
-  document.getElementById('leftToLevel').innerHTML = "Next Level:<br>" + (enemy.toNextLevel - 1) + " / " + enemy.toNextLevelMax;
+  document.getElementById('monsterGold').innerHTML = "Bounty<br> " + nFormatter((((enemy.monsterGold)) * player.goldBonusCount).toFixed(2))  + " Gold";
+  document.getElementById('monsterExp').innerHTML = "Worth<br> " + nFormatter(((enemy.exp) * player.expBonusCount).toFixed(2)) + " XP";
+  document.getElementById('leftToLevel').innerHTML = "Next Level<br>" + (enemy.toNextLevel - 1) + " / " + enemy.toNextLevelMax;
   document.getElementById('monsterLevel').innerHTML = "Level: <br>" + nFormatter(enemy.level);
+  document.getElementById('totalRPCount').innerHTML = "Spendable RP: " + nFormatter(player.reincarPoints);
+  document.getElementById('totalOverallRPCount').innerHTML = "Overall RP: " + nFormatter(player.totalOveralRP);
 }
 
   
@@ -1467,7 +1484,7 @@ $("#skeletonSkillThreeHover").hover(function() {
 
 $("#skeletonSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x5<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x20<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fog-sky-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1526,7 +1543,7 @@ $("#frostGiantSkillThreeHover").hover(function() {
 
 $("#frostGiantSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 5x<br><br>Attack Speed: +65%</p>"
+    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 15x<br><br>Attack Speed: +65%</p>"
   ), $('#notificationArea').css('background-image','url(skills/needles-blue-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1585,7 +1602,7 @@ $("#dragonlingSkillThreeHover").hover(function() {
 
 $("#dragonlingSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x8<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x12<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/rip-acid-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -2558,6 +2575,8 @@ let showSkeletonGraphic = function(){
   }
 }
 
+
+
 let showFrostGiantGraphic = function(){
   if (FrostGiant.count >= 1 && FrostGiant.count < 10){
     $("#frostGiantGraphic").html('<img id="frostGiantImageDirect" src="images/8-bit-original-frostGiant.png" />')
@@ -2581,6 +2600,7 @@ let showFrostGiantGraphic = function(){
     $("#frostGiantGraphic").html('<img id="frostGiantImageDirect" src="images/frostGiant-upgrade_6.png" />')
   }
 }
+
 
 
 let showDragonlingGraphic = function(){
@@ -2608,6 +2628,8 @@ let showDragonlingGraphic = function(){
 }
 
 
+
+
 let showThunderSerpentGraphic = function(){
   if (ThunderSerpent.count >= 1 && ThunderSerpent.count < 10){
     $("#thunderSerpentGraphic").html('<img id="thunderSerpentImageDirect" src="images/8-bit-original-thunderSerpent.png" />')
@@ -2631,6 +2653,7 @@ let showThunderSerpentGraphic = function(){
     $("#thunderSerpentGraphic").html('<img id="thunderSerpentImageDirect" src="images/thunderSerpent-upgrade_6.png" />')
   }
 }
+
 
 /*
 *
@@ -2806,6 +2829,51 @@ let checkForNextRP = function(){
   }
 }
 
+//Reset RP Points 
+
+let resetRP = function(){
+  player.reincarPoints = player.totalOveralRP;
+  
+  player.bonusRPTalentOne = 0;		
+  Skeleton.addDam = 0;
+  player.bonusRPTalentOneCost = 1;				
+  player.bonusRPTalentTwo = 0;
+  Skeleton.addSpeed = 0;
+  player.bonusRPTalentTwoCost = 1;
+  player.bonusRPTalentThree = 0;
+  player.bonusRPCount = 1;  
+  player.bonusRPTalentThreeCost = 10;
+  player.bonusRPTalentFour= 0;
+  FrostGiant.addDam = 0;
+  player.bonusRPTalentFourCost= 1;
+  player.bonusRPTalentFive= 0;
+  FrostGiant.addSpeed = 0;
+  player.bonusRPTalentFiveCost= 1;
+  player.bonusRPTalentSix = 0;
+  player.goldBonusCount = 1.00;
+  player.bonusRPTalentSixCost = 1;
+  player.bonusRPTalentSeven = 0;
+  Dragonling.addDam = 0;
+  player.bonusRPTalentSevenCost = 1;
+  player.bonusRPTalentEight = 0;
+  Dragonling.addSpeed = 0;
+  player.bonusRPTalentEightCost = 1;
+  player.bonusRPTalentNine= 0;
+  player.expBonusCount = 1.00;
+  player.bonusRPTalentNineCost= 1;
+  player.bonusRPTalentTen = 0;
+  ThunderSerpent.addDam = 0;
+  player.bonusRPTalentTenCost = 1;
+  player.bonusRPTalentEleven= 0;
+  ThunderSerpent.addSpeed= 0;
+  player.bonusRPTalentElevenCost= 1;
+  player.bonusRPTalentTwelve= 0;
+  enemy.toNextLevelMax = 10;
+  player.bonusRPTalentTwelveCost= 10;
+  
+  talentTreeInitialDescriptions();
+}
+
 //Sets background for RP Section
 let backgroundRPCheck = function(){
   
@@ -2833,7 +2901,7 @@ let backgroundRPCheck = function(){
   }
 }
 
-setInterval (backgroundRPCheck, 500);
+setInterval(backgroundRPCheck, 500);
 
 /* Display Next RP Points */
 let checkNextRP = function(){
@@ -2849,25 +2917,74 @@ let checkNextRP = function(){
 
 let costMultiplyOne = function(){
   player.costMultiplier = 1;
-  document.getElementById("costMultiplierOne").style.borderColor = "#f42";
-  document.getElementById("costMultiplierOne").style.color = "#f42";
+  document.getElementById("costMultiplierOne").style.borderColor = "red";
+  document.getElementById("costMultiplierOne").style.color = "red";
+  document.getElementById("costMultiplierTwo").style.borderColor = "#000";
+  document.getElementById("costMultiplierTwo").style.color = "#000";
+  document.getElementById("costMultiplierThree").style.borderColor = "#000";
+  document.getElementById("costMultiplierThree").style.color = "#000";
+  document.getElementById("costMultiplierFour").style.borderColor = "#000";
+  document.getElementById("costMultiplierFour").style.color = "#000";
+  document.getElementById("costMultiplierFive").style.borderColor = "#000";
+  document.getElementById("costMultiplierFive").style.color = "#000";
 }
 
 let costMultiplyTwo = function(){
   player.costMultiplier = 10;  
+  document.getElementById("costMultiplierOne").style.borderColor = "#000";
+  document.getElementById("costMultiplierOne").style.color = "#000";
+  document.getElementById("costMultiplierTwo").style.borderColor = "red";
+  document.getElementById("costMultiplierTwo").style.color = "red";
+  document.getElementById("costMultiplierThree").style.borderColor = "#000";
+  document.getElementById("costMultiplierThree").style.color = "#000";
+  document.getElementById("costMultiplierFour").style.borderColor = "#000";
+  document.getElementById("costMultiplierFour").style.color = "#000";
+  document.getElementById("costMultiplierFive").style.borderColor = "#000";
+  document.getElementById("costMultiplierFive").style.color = "#000";
 }
 
 let costMultiplyThree = function(){
-  player.costMultiplier = 25;  
+  player.costMultiplier = 25;
+  document.getElementById("costMultiplierOne").style.borderColor = "#000";
+  document.getElementById("costMultiplierOne").style.color = "#000";
+  document.getElementById("costMultiplierTwo").style.borderColor = "#000";
+  document.getElementById("costMultiplierTwo").style.color = "#000";
+  document.getElementById("costMultiplierThree").style.borderColor = "red";
+  document.getElementById("costMultiplierThree").style.color = "red";
+  document.getElementById("costMultiplierFour").style.borderColor = "#000";
+  document.getElementById("costMultiplierFour").style.color = "#000";
+  document.getElementById("costMultiplierFive").style.borderColor = "#000";
+  document.getElementById("costMultiplierFive").style.color = "#000";
 }
 
 let costMultiplyFour = function(){
   player.costMultiplier = 100; 
+  document.getElementById("costMultiplierOne").style.borderColor = "#000";
+  document.getElementById("costMultiplierOne").style.color = "#000";
+  document.getElementById("costMultiplierTwo").style.borderColor = "#000";
+  document.getElementById("costMultiplierTwo").style.color = "#000";
+  document.getElementById("costMultiplierThree").style.borderColor = "#000";
+  document.getElementById("costMultiplierThree").style.color = "#000";
+  document.getElementById("costMultiplierFour").style.borderColor = "red";
+  document.getElementById("costMultiplierFour").style.color = "red";
+  document.getElementById("costMultiplierFive").style.borderColor = "#000";
+  document.getElementById("costMultiplierFive").style.color = "#000";
 }
 
 let costMultiplyFive = function(){
   player.costMultiplier = 1000;  
+  document.getElementById("costMultiplierOne").style.borderColor = "#000";
+  document.getElementById("costMultiplierOne").style.color = "#000";
+  document.getElementById("costMultiplierTwo").style.borderColor = "#000";
+  document.getElementById("costMultiplierTwo").style.color = "#000";
+  document.getElementById("costMultiplierThree").style.borderColor = "#000";
+  document.getElementById("costMultiplierThree").style.color = "#000";
+  document.getElementById("costMultiplierFour").style.borderColor = "#000";
+  document.getElementById("costMultiplierFour").style.color = "#000";
+  document.getElementById("costMultiplierFive").style.borderColor = "red";
+  document.getElementById("costMultiplierFive").style.color = "red";
 }
+
 
 
 //TODO - Credit Section (links below)

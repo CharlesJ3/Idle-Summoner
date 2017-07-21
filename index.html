@@ -26,10 +26,10 @@
   
   <div id="characterStats">
     <span id="floatingGoldCount"></span>
-    <div id="charExpInfo" data-title="The amount of Experience needed to level. Try Reincarnation if this becomes too difficult">EXP: </div>
-    <div id="charLevel" data-title="Starting at level 15, you'll begin to earn RP points whenever you use Reincarnation.&nbsp;&nbsp;&nbsp;&nbsp; RP Per 5 Levels:&nbsp;&nbsp;&nbsp;&nbsp; 0 - 39 :&nbsp;&nbsp;&nbsp; 1 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 40 - 99 :&nbsp; 2 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100 - 249 : 3 RP, 250 - 499 : 4 RP, 500 - 999 : 5 RP, 1000+ : 6 RP">LEVEL: </div>
+    <div id="charExpInfo" data-title="The amount of Experience needed to level. Try Reincarnation if this becomes too difficult">EXP </div>
+    <div id="charLevel" data-title="Starting at level 15, you'll begin to earn RP points whenever you use Reincarnation.&nbsp;&nbsp;&nbsp;&nbsp; RP Per 5 Levels:&nbsp;&nbsp;&nbsp;&nbsp; 0 - 39 :&nbsp;&nbsp;&nbsp; 1 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 40 - 99 :&nbsp; 2 RP,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100 - 249 : 3 RP, 250 - 499 : 4 RP, 500 - 999 : 5 RP, 1000+ : 6 RP">LEVEL </div>
     <br>
-    <div id="charRPTotal" data-title="Total RP Points to Spend. Use the 'Reincarnation Tree' to spend your points. HINT: It may be better in the beginning to reincarnate as soon as things slow down.">RP: </div>
+    <div id="charRPTotal" data-title="Total RP Points to Spend. Use the 'Reincarnation Tree' to spend your points. HINT: It may be better in the beginning to reincarnate as soon as things slow down.">RP </div>
     <br>
     <div id="charDamRP" data-title="The increase in damage from Reincarnation. Spending RP does NOT reset this, so feel free to spend away!"></div>
   </div>
@@ -115,12 +115,11 @@
   </div>
   
   <div id="costMultiplier">
-    <div id="costMultiplierOne" class="buttonCostMultiplier" onclick='costMultiplyOne()' data-title="Buy a single minion"><br>x1</div>
-    <div id="costMultiplierTwo" class="buttonCostMultiplier" onclick='costMultiplyTwo()' data-title="Buy up to (and including) 10 minions at once!"><br>x10</div>
-    <div id="costMultiplierThree" class="buttonCostMultiplier" onclick='costMultiplyThree()' data-title="Buy up to (and including) 25 minions at once!"><br>x25</div>
-    <div id="costMultiplierFour" class="buttonCostMultiplier" onclick='costMultiplyFour()' data-title="Buy up to (and including) 100 minions at once!"><br>x100</div>
-    <div id="costMultiplierFive" class="buttonCostMultiplier" onclick='costMultiplyFive()' data-title="Buy as many minions as you can afford!!!"><br>MAX</div>
-  
+    <div id="costMultiplierOne" class="buttonCostMultiplier" onclick='costMultiplyOne()'><br>x1</div>
+    <div id="costMultiplierTwo" class="buttonCostMultiplier" onclick='costMultiplyTwo()'><br>x10</div>
+    <div id="costMultiplierThree" class="buttonCostMultiplier" onclick='costMultiplyThree()'><br>x25</div>
+    <div id="costMultiplierFour" class="buttonCostMultiplier" onclick='costMultiplyFour()'><br>x100</div>
+    <div id="costMultiplierFive" class="buttonCostMultiplier" onclick='costMultiplyFive()'><br>MAX</div>
   </div>
   
   <!-- Tooltips work well but for this section we'll be outputting notifications to a certain area -->
@@ -298,6 +297,13 @@
       
       <div id="talentSixOne" class="buttonTypeSeven RPHover" onclick='talentOneFifteen()' data-title=
            ""></div>
+        <p data-title="Resets everything back to zero except Reincarnation Points (RP). Use RP to increase various stats and make fighting enemies easier." id="reincarStart" onclick='reincarnation()'><span>Reincarnation</span><br><span id="reincarnation">0 <br> RP Gain</span></p>
+      
+      <div id="totalRPCount" data-title="Your RP to spend"></div>
+      <div id="totalOverallRPCount" data-title="Your Overall RP across all Reincarnations"></div>
+      <button id="resetRP" class="buttonTypeOne" data-title="Reset your RP. Feel free to experiment without worrying about permanence!" type='button' onclick='resetRP()'>Reset RP</button>
+      
+      
     </div> 
   </div>
   
@@ -316,7 +322,6 @@
         <button id="resetGameButton" class="buttonTypeOne" type='button' onclick='resetGame()'>Reset(n/a)</button>
         <br>
         <br>
-        <p data-title="Resets everything back to zero except Reincarnation Points (RP). Use RP to increase various stats and make fighting enemies easier." id="reincarStart" onclick='reincarnation()'><span>Reincarnation</span><br><span id="reincarnation">0 <br> RP Gain</span></p>
       </div>
   </div>  
 	
