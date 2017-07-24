@@ -506,25 +506,37 @@ let enemyBackground = function(){
   else if(enemy.level < 5){
     document.getElementById("enemyOne").src="images/BanditBeigeGold.png";
   }
+  
+  
   else if(enemy.level < 9){
-    document.getElementById("enemyOne").src="images/orc_zumbi.png";
+    document.getElementById("enemyOne").src="images/bathornetgreen.png";
   }
   else if(enemy.level < 14){
     document.getElementById("enemyOne").src="images/BanditWhiteGrey.png";
   }
   else if(enemy.level < 19){
-    document.getElementById("enemyOne").src="images/orc_stone.png";
+    document.getElementById("enemyOne").src="images/orc_zumbi.png";
   }
+  
   else if(enemy.level < 24){
-    document.getElementById("enemyOne").src="images/BanditBlueDarkBlue.png";
+    document.getElementById("enemyOne").src="images/bathornetblue.png";
   }
   else if(enemy.level < 29){
-    document.getElementById("enemyOne").src="images/orc_zumbi_2.png";
-  }
-  else if(enemy.level < 34){
     document.getElementById("enemyOne").src="images/BanditBlackRed.png";
   }
+  else if(enemy.level < 34){
+    document.getElementById("enemyOne").src="images/orc_stone.png";
+  }
   else if(enemy.level < 39){
+    document.getElementById("enemyOne").src="images/BanditBlueDarkBlue.png";
+  }
+  else if(enemy.level < 44){
+    document.getElementById("enemyOne").src="images/orc_zumbi_2.png";
+  }
+  else if(enemy.level < 49){
+    document.getElementById("enemyOne").src="images/bathornetred.png";
+  }
+  else if(enemy.level < 54){
     document.getElementById("enemyOne").src="images/orc_hig.png";//dup
   }
   
@@ -672,7 +684,7 @@ let skeletonSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    Skeleton.damage *= 20;
+    Skeleton.damage *= 10;
     Skeleton.speed *= .75;
   }
 }
@@ -754,7 +766,7 @@ let frostGiantSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    FrostGiant.damage *= 15;
+    FrostGiant.damage *= 10;
     FrostGiant.speed *= .35;
   }
 }
@@ -835,7 +847,7 @@ let dragonlingSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    Dragonling.damage *= 13;
+    Dragonling.damage *= 10;
     Dragonling.speed *= .70;
   }
 }
@@ -917,7 +929,7 @@ let thunderSerpentSkillFourth = function(){
 
     //Template above is finished, do custom skill below
     //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 11;
+    ThunderSerpent.damage *= 10;
     ThunderSerpent.speed *= .75;
   }
 }
@@ -1341,7 +1353,7 @@ let showStats = function(){
   document.getElementById('charLevel').innerHTML = "Level: " + nFormatter(player.level);    
   document.getElementById('charRPTotal').innerHTML = "RP: " + nFormatter(player.reincarPoints);
   document.getElementById('charDamRP').innerHTML = "RP x: " + nFormatter((player.damageIncreaseRP).toFixed(2));
-  document.getElementById('charExpInfo').innerHTML = "EXP: " + nFormatter((player.exp).toFixed(2)) + " / " + nFormatter(Math.ceil(player.maxXp));
+  document.getElementById('charExpInfo').innerHTML = "EXP: <br>" + nFormatter((player.exp).toFixed(0)) + " / " + nFormatter(Math.ceil(player.maxXp));
 
   //Skeleton     
   document.getElementById('skeletonDamage').innerHTML = "Damage: <br>" + nFormatter(((Skeleton.damage + Skeleton.addDam)*player.damageIncreaseRP).toFixed(2));    
@@ -1484,7 +1496,7 @@ $("#skeletonSkillThreeHover").hover(function() {
 
 $("#skeletonSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x20<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x10<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fog-sky-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1543,7 +1555,7 @@ $("#frostGiantSkillThreeHover").hover(function() {
 
 $("#frostGiantSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 15x<br><br>Attack Speed: +65%</p>"
+    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 10x<br><br>Attack Speed: +65%</p>"
   ), $('#notificationArea').css('background-image','url(skills/needles-blue-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1602,7 +1614,7 @@ $("#dragonlingSkillThreeHover").hover(function() {
 
 $("#dragonlingSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x12<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x10<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/rip-acid-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1662,7 +1674,7 @@ $("#thunderSerpentSkillThreeHover").hover(function() {
 
 $("#thunderSerpentSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleTs'>Star Freefall</p><p class='notifyDescription'>Rains down highly charged matter at the enemy from long distances<br><br>Damage: x11<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleTs'>Star Freefall</p><p class='notifyDescription'>Rains down highly charged matter at the enemy from long distances<br><br>Damage: x10<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/light-sky-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -2763,6 +2775,12 @@ let reincarnation = function() {
   ThunderSerpent.skill4 = 0;
   ThunderSerpent.skill5 = 0;
   ThunderSerpent.skill6 = 0;
+  
+  //Reset Floating Text in case of Attack Speed Overload
+  document.getElementById('floatingSkeletonDamage').innerHTML = "";
+  document.getElementById('floatingFrostGiantDamage').innerHTML = "";
+  document.getElementById('floatingDragonlingDamage').innerHTML = "";
+  document.getElementById('floatingThunderSerpentDamage').innerHTML = "";
   
   //Set some graphics back to normal
   

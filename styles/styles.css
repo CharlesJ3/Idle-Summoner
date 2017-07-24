@@ -1355,3 +1355,11 @@ th img {
   top: 65px;
   left: 20px;
 }
+
+#charExpInfo {
+  text-shadow:
+   -1px -1px 0 green,  
+    1px -1px 0 green,
+    -1px 1px 0 green,
+     1px 1px 0 green;   
+}
