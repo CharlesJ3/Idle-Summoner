@@ -611,7 +611,7 @@ let levelUpPlayer = function(){
     enemyLevelSystem();
     enemy.currentEnemyHealth = enemy.maxEnemyHealth;
     player.exp += (enemy.exp * player.expBonusCount);
-    player.gold += ((enemy.monsterGold) * player.goldBonusCount);
+    player.gold += (enemy.monsterGold * player.goldBonusCount);
     enemy.toNextLevel++;
     enemyBackground();
     checkNextRP();  
@@ -1353,7 +1353,7 @@ let showStats = function(){
   document.getElementById('charLevel').innerHTML = "Level: " + nFormatter(player.level);    
   document.getElementById('charRPTotal').innerHTML = "RP: " + nFormatter(player.reincarPoints);
   document.getElementById('charDamRP').innerHTML = "RP x: " + nFormatter((player.damageIncreaseRP).toFixed(2));
-  document.getElementById('charExpInfo').innerHTML = "EXP: <br>" + nFormatter((player.exp).toFixed(0)) + " / " + nFormatter(Math.ceil(player.maxXp));
+  document.getElementById('charExpInfo').innerHTML = "EXP: <br>" + nFormatter((player.exp).toFixed(2)) + " / " + nFormatter(Math.ceil(player.maxXp));
 
   //Skeleton     
   document.getElementById('skeletonDamage').innerHTML = "Damage: <br>" + nFormatter(((Skeleton.damage + Skeleton.addDam)*player.damageIncreaseRP).toFixed(2));    
@@ -1946,8 +1946,16 @@ let talentOneThree = function(){
   if(player.bonusRPTalentThree < player.bonusRPTalentThreeMax && player.bonusRPTalentThreeCost <= player.reincarPoints) {
     
     player.reincarPoints -= player.bonusRPTalentThreeCost;
-    player.bonusRPTalentThreeCost *= 5;
     player.bonusRPTalentThree++;
+    
+    //Smooth leveling process a bit, is too fast when RP multiplies rapidly
+    if(player.bonusRPTalentThree === 1){
+      player.bonusRPTalentThreeCost = 100;
+    }    
+    if(player.bonusRPTalentThree === 2){
+      player.bonusRPTalentThreeCost = 1000;
+    }
+    
     
     //Actual Talent Effect  
     player.bonusRPCount++;  
@@ -2004,6 +2012,22 @@ let talentOneSix = function(){
     player.bonusRPTalentSix++;
     
     
+    //Increase the cost to smooth leveling process
+    if(player.bonusRPTalentSix === 5){
+      player.bonusRPTalentSixCost++;
+    }
+    if(player.bonusRPTalentSix === 10){
+      player.bonusRPTalentSixCost++;
+    }
+    if(player.bonusRPTalentSix === 15){
+      player.bonusRPTalentSixCost++;
+    }
+    if(player.bonusRPTalentSix === 20){
+      player.bonusRPTalentSixCost++;
+    }
+
+    
+    
   //Actual Talent Effect  
   player.goldBonusCount += .02;  
   }
@@ -2058,6 +2082,21 @@ let talentOneNine = function(){
     player.reincarPoints -= player.bonusRPTalentNineCost;
     player.bonusRPTalentNine++;
     
+    
+    //Increase the cost to smooth leveling process    
+    if(player.bonusRPTalentNine === 5){
+      player.bonusRPTalentNineCost++;
+    }
+    if(player.bonusRPTalentNine === 10){
+      player.bonusRPTalentNineCost++;
+    }
+    if(player.bonusRPTalentNine === 15){
+      player.bonusRPTalentNineCost++;
+    }
+    if(player.bonusRPTalentNine === 20){
+      player.bonusRPTalentNineCost++;
+    }
+    
   //Actual Talent Effect
   player.expBonusCount += .02;
   }
@@ -2093,6 +2132,7 @@ let talentOneEleven = function(){
     player.bonusRPTalentEleven++;
     
   //Actual Talent Effect  
+    player.reincarPoints -= player.bonusRPTalentElevenCost;
     ThunderSerpent.addSpeed += 10;
   }
   
@@ -2159,49 +2199,34 @@ let saveGame = function(){
 		
     //Player - Talents
 		localStorage.bonusRPTalentOne = player.bonusRPTalentOne;
-		localStorage.bonusRPTalentOneMax = player.bonusRPTalentOneMax;
 		localStorage.bonusRPTalentOneCost = player.bonusRPTalentOneCost;
 		localStorage.bonusRPTalentTwo = player.bonusRPTalentTwo;
-		localStorage.bonusRPTalentTwoMax = player.bonusRPTalentTwoMax;
 		localStorage.bonusRPTalentTwoCost = player.bonusRPTalentTwoCost;
 		localStorage.bonusRPTalentThree = player.bonusRPTalentThree;
-		localStorage.bonusRPTalentThreeMax = player.bonusRPTalentThreeMax;
 		localStorage.bonusRPTalentThreeCost = player.bonusRPTalentThreeCost;
 		localStorage.bonusRPTalentFour = player.bonusRPTalentFour;
-		localStorage.bonusRPTalentFourMax = player.bonusRPTalentFourMax;
 		localStorage.bonusRPTalentFourCost = player.bonusRPTalentFourCost;
 		localStorage.bonusRPTalentFive = player.bonusRPTalentFive;
-		localStorage.bonusRPTalentFiveMax = player.bonusRPTalentFiveMax;
 		localStorage.bonusRPTalentFiveCost = player.bonusRPTalentFiveCost;
 		localStorage.bonusRPTalentSix = player.bonusRPTalentSix;
-		localStorage.bonusRPTalentSixMax = player.bonusRPTalentSixMax;
 		localStorage.bonusRPTalentSixCost = player.bonusRPTalentSixCost;
 		localStorage.bonusRPTalentSeven = player.bonusRPTalentSeven;
-		localStorage.bonusRPTalentSevenMax = player.bonusRPTalentSevenMax;
 		localStorage.bonusRPTalentSevenCost = player.bonusRPTalentSevenCost;
 		localStorage.bonusRPTalentEight = player.bonusRPTalentEight;
-		localStorage.bonusRPTalentEightMax = player.bonusRPTalentEightMax;
 		localStorage.bonusRPTalentEightCost = player.bonusRPTalentEightCost;
 		localStorage.bonusRPTalentNine = player.bonusRPTalentNine;
-		localStorage.bonusRPTalentNineMax = player.bonusRPTalentNineMax;
 		localStorage.bonusRPTalentNineCost = player.bonusRPTalentNineCost;
 		localStorage.bonusRPTalentTen = player.bonusRPTalentTen;
-		localStorage.bonusRPTalentTenMax = player.bonusRPTalentTenMax;
 		localStorage.bonusRPTalentTenCost = player.bonusRPTalentTenCost;
 		localStorage.bonusRPTalentEleven = player.bonusRPTalentEleven;
-		localStorage.bonusRPTalentElevenMax = player.bonusRPTalentElevenMax;
 		localStorage.bonusRPTalentElevenCost = player.bonusRPTalentElevenCost;
 		localStorage.bonusRPTalentTwelve = player.bonusRPTalentTwelve;
-		localStorage.bonusRPTalentTwelveMax = player.bonusRPTalentTwelveMax;
 		localStorage.bonusRPTalentTwelveCost = player.bonusRPTalentTwelveCost;
 		localStorage.bonusRPTalentThirteen = player.bonusRPTalentThirteen;
-		localStorage.bonusRPTalentThirteenMax = player.bonusRPTalentThirteenMax;
 		localStorage.bonusRPTalentThirteenCost = player.bonusRPTalentThirteenCost;
 		localStorage.bonusRPTalentFourteen = player.bonusRPTalentFourteen;
-		localStorage.bonusRPTalentFourteenMax = player.bonusRPTalentFourteenMax;
 		localStorage.bonusRPTalentFourteenCost = player.bonusRPTalentFourteenCost;
 		localStorage.bonusRPTalentFifteen = player.bonusRPTalentFifteen;
-		localStorage.bonusRPTalentFifteenMax = player.bonusRPTalentFifteenMax;
 		localStorage.bonusRPTalentFifteenCost = player.bonusRPTalentFifteenCost;
     
     //Enemy
@@ -2299,92 +2324,62 @@ let loadGame = function(){
 		//Player Talents
 		let bonusRPTalentOne = localStorage.getItem('bonusRPTalentOne');
 		player.bonusRPTalentOne = parseInt(bonusRPTalentOne);
-		let bonusRPTalentOneMax = localStorage.getItem('bonusRPTalentOneMax');
-		player.bonusRPTalentOneMax = parseInt(bonusRPTalentOneMax);
 		let bonusRPTalentOneCost = localStorage.getItem('bonusRPTalentOneCost');
 		player.bonusRPTalentOneCost = parseInt(bonusRPTalentOneCost);
 		let bonusRPTalentTwo = localStorage.getItem('bonusRPTalentTwo');
 		player.bonusRPTalentTwo = parseInt(bonusRPTalentTwo);
-		let bonusRPTalentTwoMax = localStorage.getItem('bonusRPTalentTwoMax');
-		player.bonusRPTalentTwoMax = parseInt(bonusRPTalentTwoMax);
 		let bonusRPTalentTwoCost = localStorage.getItem('bonusRPTalentTwoCost');
 		player.bonusRPTalentTwoCost = parseInt(bonusRPTalentTwoCost);
 		let bonusRPTalentThree = localStorage.getItem('bonusRPTalentThree');
 		player.bonusRPTalentThree = parseInt(bonusRPTalentThree);
-		let bonusRPTalentThreeMax = localStorage.getItem('bonusRPTalentThreeMax');
-		player.bonusRPTalentThreeMax = parseInt(bonusRPTalentThreeMax);
 		let bonusRPTalentThreeCost = localStorage.getItem('bonusRPTalentThreeCost');
 		player.bonusRPTalentThreeCost = parseInt(bonusRPTalentThreeCost);
 		let bonusRPTalentFour = localStorage.getItem('bonusRPTalentFour');
 		player.bonusRPTalentFour = parseInt(bonusRPTalentFour);
-		let bonusRPTalentFourMax = localStorage.getItem('bonusRPTalentFourMax');
-		player.bonusRPTalentFourMax = parseInt(bonusRPTalentFourMax);
 		let bonusRPTalentFourCost = localStorage.getItem('bonusRPTalentFourCost');
 		player.bonusRPTalentFourCost = parseInt(bonusRPTalentFourCost);
 		let bonusRPTalentFive = localStorage.getItem('bonusRPTalentFive');
 		player.bonusRPTalentFive = parseInt(bonusRPTalentFive);
-		let bonusRPTalentFiveMax = localStorage.getItem('bonusRPTalentFiveMax');
-		player.bonusRPTalentFiveMax = parseInt(bonusRPTalentFiveMax);
 		let bonusRPTalentFiveCost = localStorage.getItem('bonusRPTalentFiveCost');
 		player.bonusRPTalentFiveCost = parseInt(bonusRPTalentFiveCost);
 		let bonusRPTalentSix = localStorage.getItem('bonusRPTalentSix');
 		player.bonusRPTalentSix = parseInt(bonusRPTalentSix);
-		let bonusRPTalentSixMax = localStorage.getItem('bonusRPTalentSixMax');
-		player.bonusRPTalentSixMax = parseInt(bonusRPTalentSixMax);
 		let bonusRPTalentSixCost = localStorage.getItem('bonusRPTalentSixCost');
 		player.bonusRPTalentSixCost = parseInt(bonusRPTalentSixCost);
 		let bonusRPTalentSeven = localStorage.getItem('bonusRPTalentSeven');
 		player.bonusRPTalentSeven = parseInt(bonusRPTalentSeven);
-		let bonusRPTalentSevenMax = localStorage.getItem('bonusRPTalentSevenMax');
-		player.bonusRPTalentSevenMax = parseInt(bonusRPTalentSevenMax);
 		let bonusRPTalentSevenCost = localStorage.getItem('bonusRPTalentSevenCost');
 		player.bonusRPTalentSevenCost = parseInt(bonusRPTalentSevenCost );
 		let bonusRPTalentEight = localStorage.getItem('bonusRPTalentEight');
 		player.bonusRPTalentEight = parseInt(bonusRPTalentEight);
-		let bonusRPTalentEightMax = localStorage.getItem('bonusRPTalentEightMax');
-		player.bonusRPTalentEightMax = parseInt(bonusRPTalentEightMax);
 		let bonusRPTalentEightCost = localStorage.getItem('bonusRPTalentEightCost');
 		player.bonusRPTalentEightCost = parseInt(bonusRPTalentEightCost);
 		let bonusRPTalentNine = localStorage.getItem('bonusRPTalentNine');
 		player.bonusRPTalentNine = parseInt(bonusRPTalentNine);
-		let bonusRPTalentNineMax = localStorage.getItem('bonusRPTalentNineMax');
-		player.bonusRPTalentNineMax = parseInt(bonusRPTalentNineMax);
 		let bonusRPTalentNineCost = localStorage.getItem('bonusRPTalentNineCost');
 		player.bonusRPTalentNineCost = parseInt(bonusRPTalentNineCost);
 		let bonusRPTalentTen = localStorage.getItem('bonusRPTalentTen');
 		player.bonusRPTalentTen = parseInt(bonusRPTalentTen);
-		let bonusRPTalentTenMax = localStorage.getItem('bonusRPTalentTenMax');
-		player.bonusRPTalentTenMax = parseInt(bonusRPTalentTenMax);
 		let bonusRPTalentTenCost = localStorage.getItem('bonusRPTalentTenCost');
 		player.bonusRPTalentTenCost = parseInt(bonusRPTalentTenCost);
 		let bonusRPTalentEleven = localStorage.getItem('bonusRPTalentEleven');
 		player.bonusRPTalentEleven = parseInt(bonusRPTalentEleven);
-		let bonusRPTalentElevenMax = localStorage.getItem('bonusRPTalentElevenMax');
-		player.bonusRPTalentElevenMax = parseInt(bonusRPTalentElevenMax);
 		let bonusRPTalentElevenCost = localStorage.getItem('bonusRPTalentElevenCost');
 		player.bonusRPTalentElevenCost = parseInt(bonusRPTalentElevenCost);
 		let bonusRPTalentTwelve = localStorage.getItem('bonusRPTalentTwelve');
 		player.bonusRPTalentTwelve = parseInt(bonusRPTalentTwelve);
-		let bonusRPTalentTwelveMax = localStorage.getItem('bonusRPTalentTwelveMax');
-		player.bonusRPTalentTwelveMax = parseInt(bonusRPTalentTwelveMax);
 		let bonusRPTalentTwelveCost = localStorage.getItem('bonusRPTalentTwelveCost');
 		player.bonusRPTalentTwelveCost = parseInt(bonusRPTalentTwelveCost);
 		let bonusRPTalentThirteen = localStorage.getItem('bonusRPTalentThirteen');
 		player.bonusRPTalentThirteen = parseInt(bonusRPTalentThirteen);
-		let bonusRPTalentThirteenMax = localStorage.getItem('bonusRPTalentThirteenMax');
-		player.bonusRPTalentThirteenMax = parseInt(bonusRPTalentThirteenMax);
 		let bonusRPTalentThirteenCost = localStorage.getItem('bonusRPTalentThirteenCost');
 		player.bonusRPTalentThirteenCost = parseInt(bonusRPTalentThirteenCost);
 		let bonusRPTalentFourteen = localStorage.getItem('bonusRPTalentFourteen');
 		player.bonusRPTalentFourteen = parseInt(bonusRPTalentFourteen);
-		let bonusRPTalentFourteenMax = localStorage.getItem('bonusRPTalentFourteenMax');
-		player.bonusRPTalentFourteenMax = parseInt(bonusRPTalentFourteenMax);
 		let bonusRPTalentFourteenCost = localStorage.getItem('bonusRPTalentFourteenCost');
 		player.bonusRPTalentFourteenCost = parseInt(bonusRPTalentFourteenCost);
 		let bonusRPTalentFifteen = localStorage.getItem('bonusRPTalentFifteen');
 		player.bonusRPTalentFifteen = parseInt(bonusRPTalentFifteen);
-		let bonusRPTalentFifteenMax = localStorage.getItem('bonusRPTalentFifteenMax');
-		player.bonusRPTalentFifteenMax= parseInt(bonusRPTalentFifteenMax);
 		let bonusRPTalentFifteenCost = localStorage.getItem('bonusRPTalentFifteenCost');
 		player.bonusRPTalentFifteenCost= parseInt(bonusRPTalentFifteenCost);
 		
