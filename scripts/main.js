@@ -483,14 +483,15 @@ let enemyLevelSystem = function(){
       
       //Determines
       if(enemy.level < 10 && enemy.level > 0){
-      enemy.maxEnemyHealth *= 1.415;
+      enemy.maxEnemyHealth *= 1.315;
       }
-      if(enemy.level < 75 && enemy.level > 9){
+      if(enemy.level < 49 && enemy.level > 9){
       enemy.maxEnemyHealth *= 1.335;
       }
-      if(enemy.level > 75){
-      enemy.maxEnemyHealth *= 1.28;
+      if(enemy.level > 50){
+      enemy.maxEnemyHealth *= 1.415;
       }
+    
       enemy.level++;
       enemy.exp = ((enemy.exp * player.expBonusCount) * 1.15);
 
@@ -623,7 +624,18 @@ let levelUpPlayer = function(){
     player.level++;
     checkForNextRP();
     player.exp = 0;
-    player.maxXp *= 1.20;
+    
+    if(player.level <= 75){
+      player.maxXp *= 1.20;
+    }
+    
+    if(player.level <= 100 && player.level < 75){
+      player.maxXp *= 1.25;
+    }
+    
+    if(player.level > 100){
+      player.maxXp *= 1.30;
+    }
   }
 }
 
