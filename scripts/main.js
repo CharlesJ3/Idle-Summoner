@@ -269,7 +269,7 @@ setTimeout(autoattackSkeleton, 10);
 /* ************************************************ */
 
 //Character 2 : Frost Giant
-let FrostGiant = new pet('Frost Giant', 1, 7, "Frost", 2500, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0);
+let FrostGiant = new pet('Frost Giant', 1, 9, "Frost", 2800, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0);
 
 let buyFrostGiant = function(){  
 
@@ -502,7 +502,7 @@ let enemyLevelSystem = function(){
 let enemyBackground = function(){
 
   if(enemy.level < 2){
-    document.getElementById("enemyOne").src="http://charlesjones.me/sites/default/files/images/orc.png";
+    document.getElementById("enemyOne").src="images/orc_zumbi.png";
   }
   else if(enemy.level < 5){
     document.getElementById("enemyOne").src="images/BanditBeigeGold.png";
@@ -1879,7 +1879,7 @@ let talentTreeInitialDescriptions = function(){
   ); 
   
   $("#talentTwoThree").html(
-    "<p class='talentTitle'>Bonus Gold % :<br>" + player.bonusRPTalentSix + " / " + player.bonusRPTalentSixMax + "<br><span>" + player.goldBonusCount.toFixed(2) + " % Gold " + "<br> Cost: " + player.bonusRPTalentSixCost + "</span></p>"
+    "<p class='talentTitle'>Bonus Gold % :<br>" + player.bonusRPTalentSix + " / " + player.bonusRPTalentSixMax + "<br><span>" + player.goldBonusCount.toFixed(2) + " x % Gold " + "<br> Cost: " + player.bonusRPTalentSixCost + "</span></p>"
   );
   
   $("#talentThreeOne").html(
@@ -2748,10 +2748,10 @@ let reincarnation = function() {
   Skeleton.skill6 = 0; 
   
   //FrostGiant
-  FrostGiant.damage = 7;
-  FrostGiant.speed = 2500;
+  FrostGiant.damage = 9;
+  FrostGiant.speed = 2800;
   FrostGiant.count = 0;
-  FrostGiant.cost = 125;
+  FrostGiant.cost = 200;
   FrostGiant.skill1 = 0;   
   FrostGiant.skill2 = 0;  
   FrostGiant.skill3 = 0;  
@@ -2829,7 +2829,7 @@ let setThunderSerpentInitialCost = function(){
 let checkForNextRP = function(){
   let checkForLevel = player.level % 5;
   
-  if (checkForLevel === 0 && player.level > 14 && player.level < 39	){
+  if (checkForLevel === 0 && player.level > 1 && player.level < 39	){
     player.nextReincarPoints = player.nextReincarPoints + (1 * player.bonusRPCount);
   }
   

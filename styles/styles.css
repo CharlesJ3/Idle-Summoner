@@ -195,7 +195,7 @@ body{
   position: absolute;
   color: white;
   width: 122px;
-  background-image: url('http://charlesjones.me/sites/default/files/game/images/Deco_skeleto_sitdown.PNG');
+  background-image: url('../images/Deco_skeleto_sitdown.PNG');
   background-size: cover;
   background-clip: border-box;
   background-position: center center;
@@ -261,7 +261,7 @@ body{
   position: absolute;
   color: white;    
   width: 122px;
-  background-image: url('http://charlesjones.me/sites/default/files/game/images/snake-1945345_960_720.jpg');
+  background-image: url('../images/snake-1945345_960_720.jpg');
   background-size: cover;
   background-clip: border-box;
   background-position: center center;
@@ -411,7 +411,7 @@ body{
      1px 1px 0 #000;
   
   top: 20px;
-  left: 350px;
+  left: 345px;
   position: absolute;
   color: white;
   font-weight: bold;
