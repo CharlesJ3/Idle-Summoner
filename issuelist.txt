@@ -1,0 +1,43 @@
+Active Issue List (Needs to be fixed before launch):
+
+
+Issue 1 - Trying to load with nothing saved will produce NAN 
+          13AUG2017 - Update 1 - Added check for saved variable before 
+  
+Issue 2 - Several load fields are not the same as the newly-changed values; match them correctly
+          13AUG2017 - Update 1 - Changed parseInt to parseFloat to accomodate non-whole numbers
+          13AUG2017 - Update 2 - Added a section that let's the user know the save did not or couldn't happen
+
+
+Issue 3 - Several reincarnation fields MAY not be the same, more testing to verify this
+Issue 4 - What do you do post level 500 with your minions? I've never gotten there but someone might. Prestige them? 
+Issue 5 - Add several more levels to Number Conversion
+Issue 6 - Check TODO and REFACTOR comments
+Issue 7 - Front UI/UX needs to be improved. Nothing major but easier to read and navigate is a must
+Issue 8 - Several talent fields MAY not be the same, more testing to verify this
+Issue 9 - Balancing speed issue; make sure no speed can reach infinity or it will crash the game
+Issue 10 - At least a better attempt at rebalancing. There is nothing to do past level 
+Issue 11 - A possible way to help balancing is to slow the process down; as in don't make things easier or harder, but lower the numbers in general. 
+           Things get to high numbers way too easy.
+           
+           
+Issue 12 - Autosave system
+        
+
+
+
+
+
+Game Additions List ("Nice before launch but not necessary"):
+
+
+Issue 1 - Tutorial needs to be easier to comprehend
+Issue 2 - Possibly a FAQ section
+Issue 3 - Nicer, cleaner UI
+Issue 4 - Research a cloud save system (node.js)
+Issue 5 - 
+Issue 6 - 
+Issue 7 - 
+Issue 8 - 
+Issue 9 - 
+Issue 10 - 

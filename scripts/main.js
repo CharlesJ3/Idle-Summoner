@@ -1,10 +1,3 @@
-/*Load jQueryUI CSS
-  $("<link/>", {
-   rel: "stylesheet",
-   type: "text/css",
-   href: "http://www.charlesjones.me/sites/default/files/game/css/jquery-ui.css"
-}).appendTo("head");
-*/
 /*
 *
 * Quick Index 
@@ -1908,6 +1901,8 @@ let talentTreeInitialDescriptions = function(){
   
 }
 
+console.log(null == undefined);
+
 talentTreeInitialDescriptions();
 
 /*
@@ -2306,204 +2301,215 @@ let saveGame = function(){
 }
 
 let loadGame = function(){
-  if(typeof(Storage) !== "undefined") { 
-    
+  if(typeof(Storage) !== "undefined" && localStorage.playerTotalPets != null) { 
+
     //Player
     let plTotalPets = localStorage.getItem('playerTotalPets');
-      player.totalPets = parseInt(plTotalPets); 
+      player.totalPets = parseFloat(plTotalPets); 
     let plGold = localStorage.getItem('playerGold');
-      player.gold = parseInt(plGold); 
+      player.gold = parseFloat(plGold); 
     let plLevel = localStorage.getItem('playerLevel');
-      player.level = parseInt(plLevel); 
+      player.level = parseFloat(plLevel); 
     let plMaxXp = localStorage.getItem('playerMaxXp');
-      player.maxXp = parseInt(plMaxXp); 
+      player.maxXp = parseFloat(plMaxXp); 
     let plXp = localStorage.getItem('playerExp');
-      player.exp = parseInt(plXp);
+      player.exp = parseFloat(plXp);
     let plNextRP = localStorage.getItem('playerNextRP');
-      player.nextReincarPoints = parseInt(plNextRP)
+      player.nextReincarPoints = parseFloat(plNextRP)
     let plRP = localStorage.getItem('playerRP');
-      player.reincarPoints = parseInt(plRP);
+      player.reincarPoints = parseFloat(plRP);
     let plTotalOveralRP = localStorage.getItem('playerTotalOverallRP');
-      player.totalOveralRP = parseInt(plTotalOveralRP);
+      player.totalOveralRP = parseFloat(plTotalOveralRP);
+    
+    //For testing a rare loading bug with player.damageIncreaseRP
+    //TODO: Possibly solved but test more!
+    //console.log('RP Before:' + player.damageIncreaseRP);
+    
     let pldamageRP = localStorage.getItem('damageRP');
-      player.damageIncreaseRP = parseInt(pldamageRP);
+    
+        //console.log('pldamageRP Before:' + pldamageRP);
+    
+    player.damageIncreaseRP = parseFloat(pldamageRP);
+    
+    //console.log('RP After:' + player.damageIncreaseRP);
+    
 		let goldBonusCount = localStorage.getItem('goldBonusCount');
-			player.goldBonusCount = parseInt(goldBonusCount);
+			player.goldBonusCount = parseFloat(goldBonusCount);
 		let expBonusCount = localStorage.getItem('expBonusCount');
-			player.expBonusCount = parseInt(expBonusCount);
+			player.expBonusCount = parseFloat(expBonusCount);
 		
     
 		//Player Talents
 		let bonusRPTalentOne = localStorage.getItem('bonusRPTalentOne');
-		player.bonusRPTalentOne = parseInt(bonusRPTalentOne);
+		player.bonusRPTalentOne = parseFloat(bonusRPTalentOne);
 		let bonusRPTalentOneCost = localStorage.getItem('bonusRPTalentOneCost');
-		player.bonusRPTalentOneCost = parseInt(bonusRPTalentOneCost);
+		player.bonusRPTalentOneCost = parseFloat(bonusRPTalentOneCost);
 		let bonusRPTalentTwo = localStorage.getItem('bonusRPTalentTwo');
-		player.bonusRPTalentTwo = parseInt(bonusRPTalentTwo);
+		player.bonusRPTalentTwo = parseFloat(bonusRPTalentTwo);
 		let bonusRPTalentTwoCost = localStorage.getItem('bonusRPTalentTwoCost');
-		player.bonusRPTalentTwoCost = parseInt(bonusRPTalentTwoCost);
+		player.bonusRPTalentTwoCost = parseFloat(bonusRPTalentTwoCost);
 		let bonusRPTalentThree = localStorage.getItem('bonusRPTalentThree');
-		player.bonusRPTalentThree = parseInt(bonusRPTalentThree);
+		player.bonusRPTalentThree = parseFloat(bonusRPTalentThree);
 		let bonusRPTalentThreeCost = localStorage.getItem('bonusRPTalentThreeCost');
-		player.bonusRPTalentThreeCost = parseInt(bonusRPTalentThreeCost);
+		player.bonusRPTalentThreeCost = parseFloat(bonusRPTalentThreeCost);
 		let bonusRPTalentFour = localStorage.getItem('bonusRPTalentFour');
-		player.bonusRPTalentFour = parseInt(bonusRPTalentFour);
+		player.bonusRPTalentFour = parseFloat(bonusRPTalentFour);
 		let bonusRPTalentFourCost = localStorage.getItem('bonusRPTalentFourCost');
-		player.bonusRPTalentFourCost = parseInt(bonusRPTalentFourCost);
+		player.bonusRPTalentFourCost = parseFloat(bonusRPTalentFourCost);
 		let bonusRPTalentFive = localStorage.getItem('bonusRPTalentFive');
-		player.bonusRPTalentFive = parseInt(bonusRPTalentFive);
+		player.bonusRPTalentFive = parseFloat(bonusRPTalentFive);
 		let bonusRPTalentFiveCost = localStorage.getItem('bonusRPTalentFiveCost');
-		player.bonusRPTalentFiveCost = parseInt(bonusRPTalentFiveCost);
+		player.bonusRPTalentFiveCost = parseFloat(bonusRPTalentFiveCost);
 		let bonusRPTalentSix = localStorage.getItem('bonusRPTalentSix');
-		player.bonusRPTalentSix = parseInt(bonusRPTalentSix);
+		player.bonusRPTalentSix = parseFloat(bonusRPTalentSix);
 		let bonusRPTalentSixCost = localStorage.getItem('bonusRPTalentSixCost');
-		player.bonusRPTalentSixCost = parseInt(bonusRPTalentSixCost);
+		player.bonusRPTalentSixCost = parseFloat(bonusRPTalentSixCost);
 		let bonusRPTalentSeven = localStorage.getItem('bonusRPTalentSeven');
-		player.bonusRPTalentSeven = parseInt(bonusRPTalentSeven);
+		player.bonusRPTalentSeven = parseFloat(bonusRPTalentSeven);
 		let bonusRPTalentSevenCost = localStorage.getItem('bonusRPTalentSevenCost');
-		player.bonusRPTalentSevenCost = parseInt(bonusRPTalentSevenCost );
+		player.bonusRPTalentSevenCost = parseFloat(bonusRPTalentSevenCost );
 		let bonusRPTalentEight = localStorage.getItem('bonusRPTalentEight');
-		player.bonusRPTalentEight = parseInt(bonusRPTalentEight);
+		player.bonusRPTalentEight = parseFloat(bonusRPTalentEight);
 		let bonusRPTalentEightCost = localStorage.getItem('bonusRPTalentEightCost');
-		player.bonusRPTalentEightCost = parseInt(bonusRPTalentEightCost);
+		player.bonusRPTalentEightCost = parseFloat(bonusRPTalentEightCost);
 		let bonusRPTalentNine = localStorage.getItem('bonusRPTalentNine');
-		player.bonusRPTalentNine = parseInt(bonusRPTalentNine);
+		player.bonusRPTalentNine = parseFloat(bonusRPTalentNine);
 		let bonusRPTalentNineCost = localStorage.getItem('bonusRPTalentNineCost');
-		player.bonusRPTalentNineCost = parseInt(bonusRPTalentNineCost);
+		player.bonusRPTalentNineCost = parseFloat(bonusRPTalentNineCost);
 		let bonusRPTalentTen = localStorage.getItem('bonusRPTalentTen');
-		player.bonusRPTalentTen = parseInt(bonusRPTalentTen);
+		player.bonusRPTalentTen = parseFloat(bonusRPTalentTen);
 		let bonusRPTalentTenCost = localStorage.getItem('bonusRPTalentTenCost');
-		player.bonusRPTalentTenCost = parseInt(bonusRPTalentTenCost);
+		player.bonusRPTalentTenCost = parseFloat(bonusRPTalentTenCost);
 		let bonusRPTalentEleven = localStorage.getItem('bonusRPTalentEleven');
-		player.bonusRPTalentEleven = parseInt(bonusRPTalentEleven);
+		player.bonusRPTalentEleven = parseFloat(bonusRPTalentEleven);
 		let bonusRPTalentElevenCost = localStorage.getItem('bonusRPTalentElevenCost');
-		player.bonusRPTalentElevenCost = parseInt(bonusRPTalentElevenCost);
+		player.bonusRPTalentElevenCost = parseFloat(bonusRPTalentElevenCost);
 		let bonusRPTalentTwelve = localStorage.getItem('bonusRPTalentTwelve');
-		player.bonusRPTalentTwelve = parseInt(bonusRPTalentTwelve);
+		player.bonusRPTalentTwelve = parseFloat(bonusRPTalentTwelve);
 		let bonusRPTalentTwelveCost = localStorage.getItem('bonusRPTalentTwelveCost');
-		player.bonusRPTalentTwelveCost = parseInt(bonusRPTalentTwelveCost);
+		player.bonusRPTalentTwelveCost = parseFloat(bonusRPTalentTwelveCost);
 		let bonusRPTalentThirteen = localStorage.getItem('bonusRPTalentThirteen');
-		player.bonusRPTalentThirteen = parseInt(bonusRPTalentThirteen);
+		player.bonusRPTalentThirteen = parseFloat(bonusRPTalentThirteen);
 		let bonusRPTalentThirteenCost = localStorage.getItem('bonusRPTalentThirteenCost');
-		player.bonusRPTalentThirteenCost = parseInt(bonusRPTalentThirteenCost);
+		player.bonusRPTalentThirteenCost = parseFloat(bonusRPTalentThirteenCost);
 		let bonusRPTalentFourteen = localStorage.getItem('bonusRPTalentFourteen');
-		player.bonusRPTalentFourteen = parseInt(bonusRPTalentFourteen);
+		player.bonusRPTalentFourteen = parseFloat(bonusRPTalentFourteen);
 		let bonusRPTalentFourteenCost = localStorage.getItem('bonusRPTalentFourteenCost');
-		player.bonusRPTalentFourteenCost = parseInt(bonusRPTalentFourteenCost);
+		player.bonusRPTalentFourteenCost = parseFloat(bonusRPTalentFourteenCost);
 		let bonusRPTalentFifteen = localStorage.getItem('bonusRPTalentFifteen');
-		player.bonusRPTalentFifteen = parseInt(bonusRPTalentFifteen);
+		player.bonusRPTalentFifteen = parseFloat(bonusRPTalentFifteen);
 		let bonusRPTalentFifteenCost = localStorage.getItem('bonusRPTalentFifteenCost');
-		player.bonusRPTalentFifteenCost= parseInt(bonusRPTalentFifteenCost);
+		player.bonusRPTalentFifteenCost= parseFloat(bonusRPTalentFifteenCost);
 		
     //Enemy
     let enCurrentHealth = localStorage.getItem('currentEnemyHealth');
-      enemy.currentEnemyHealth = parseInt(enCurrentHealth); 
+      enemy.currentEnemyHealth = parseFloat(enCurrentHealth); 
     let enMaxHealth = localStorage.getItem('maxEnemyHealth');
-      enemy.maxEnemyHealth = parseInt(enMaxHealth); 
+      enemy.maxEnemyHealth = parseFloat(enMaxHealth); 
     let enToNextLevel = localStorage.getItem('enemyToNextLevel');
-      enemy.toNextLevel = parseInt(enToNextLevel); 
+      enemy.toNextLevel = parseFloat(enToNextLevel); 
     let enToNextLevelMax = localStorage.getItem('enemyToNextLevelMax');
-      enemy.enToNextLevelMax = parseInt(enToNextLevelMax); 
+      enemy.enToNextLevelMax = parseFloat(enToNextLevelMax); 
     let enLevel = localStorage.getItem('enemyLevel');
-      enemy.level = parseInt(enLevel); 
+      enemy.level = parseFloat(enLevel); 
     let enGold = localStorage.getItem('enemyGold');
-      enemy.monsterGold = parseInt(enGold); 
+      enemy.monsterGold = parseFloat(enGold); 
     let enExp = localStorage.getItem('monsterExp');
-      enemy.exp = parseInt(enExp);
+      enemy.exp = parseFloat(enExp);
     
     //Skeleton
     let skCount = localStorage.getItem('skeletonCount');
-      Skeleton.count = parseInt(skCount);
+      Skeleton.count = parseFloat(skCount);
     let skDamage = localStorage.getItem('skeletonDamage');
-      Skeleton.damage = parseInt(skDamage);
+      Skeleton.damage = parseFloat(skDamage);
     let skCost = localStorage.getItem('skeletonCost');
-      Skeleton.cost = parseInt(skCost);
+      Skeleton.cost = parseFloat(skCost);
     let skLevel = localStorage.getItem('skeletonLevel');
-      Skeleton.level = parseInt(skLevel);
+      Skeleton.level = parseFloat(skLevel);
     
     //Had to parse these strings below //Research why below is a string and above is an int?
     let skS1 = localStorage.getItem('skeletonSkillOne');
-      Skeleton.skill1 = parseInt(skS1);
+      Skeleton.skill1 = parseFloat(skS1);
     let skS2 = localStorage.getItem('skeletonSkillTwo');
-      Skeleton.skill2 = parseInt(skS2);
+      Skeleton.skill2 = parseFloat(skS2);
     let skS3 = localStorage.getItem('skeletonSkillThree');
-      Skeleton.skill3 = parseInt(skS3);
+      Skeleton.skill3 = parseFloat(skS3);
     let skS4 = localStorage.getItem('skeletonSkillFour');
-      Skeleton.skill4 = parseInt(skS4);
+      Skeleton.skill4 = parseFloat(skS4);
     let skS5 = localStorage.getItem('skeletonSkillFive');
-      Skeleton.skill5 = parseInt(skS5);
+      Skeleton.skill5 = parseFloat(skS5);
     let skS6 = localStorage.getItem('skeletonSkillSix');
-      Skeleton.skill6 = parseInt(skS6);
+      Skeleton.skill6 = parseFloat(skS6);
     
     //FrostGiant
     let frCount = localStorage.getItem('frostGiantCount');
-      FrostGiant.count = parseInt(frCount);
+      FrostGiant.count = parseFloat(frCount);
     let frDamage = localStorage.getItem('frostGiantDamage');
-      FrostGiant.damage = parseInt(frDamage);
+      FrostGiant.damage = parseFloat(frDamage);
     let frCost = localStorage.getItem('frostGiantCost');
-      FrostGiant.cost = parseInt(frCost);
+      FrostGiant.cost = parseFloat(frCost);
     let frLevel = localStorage.getItem('frostGiantLevel');
-      FrostGiant.level = parseInt(frLevel);
+      FrostGiant.level = parseFloat(frLevel);
     
     //Had to parse these strings below
     let frS1 = localStorage.getItem('frostGiantSkillOne');
-      FrostGiant.skill1 = parseInt(frS1);
+      FrostGiant.skill1 = parseFloat(frS1);
     let frS2 = localStorage.getItem('frostGiantSkillTwo');
-      FrostGiant.skill2 = parseInt(frS2); 
+      FrostGiant.skill2 = parseFloat(frS2); 
     let frS3 = localStorage.getItem('frostGiantSkillThree');
-      FrostGiant.skill3 = parseInt(frS3);
+      FrostGiant.skill3 = parseFloat(frS3);
     let frS4 = localStorage.getItem('frostGiantSkillFour');
-      FrostGiant.skill4 = parseInt(frS4);
+      FrostGiant.skill4 = parseFloat(frS4);
     let frS5 = localStorage.getItem('frostGiantSkillFive');
-      FrostGiant.skill5 = parseInt(frS5);
+      FrostGiant.skill5 = parseFloat(frS5);
     let frS6 = localStorage.getItem('frostGiantSkillSix');
-      FrostGiant.skill6 = parseInt(frS6);
+      FrostGiant.skill6 = parseFloat(frS6);
     
     //Dragonling
     let dkCount = localStorage.getItem('dragonlingCount');
-      Dragonling.count = parseInt(dkCount);
+      Dragonling.count = parseFloat(dkCount);
     let dkDamage = localStorage.getItem('dragonlingDamage');
-      Dragonling.damage = parseInt(dkDamage);
+      Dragonling.damage = parseFloat(dkDamage);
     let dkCost = localStorage.getItem('dragonlingCost');
-      Dragonling.cost = parseInt(dkCost);
+      Dragonling.cost = parseFloat(dkCost);
     let dkLevel = localStorage.getItem('dragonlingLevel');
-      Dragonling.level = parseInt(dkLevel);
+      Dragonling.level = parseFloat(dkLevel);
 
     let dkS1 = localStorage.getItem('dragonlingSkillOne');
-      Dragonling.skill1 = parseInt(dkS1);
+      Dragonling.skill1 = parseFloat(dkS1);
     let dkS2 = localStorage.getItem('dragonlingSkillTwo');
-      Dragonling.skill2 = parseInt(dkS2);
+      Dragonling.skill2 = parseFloat(dkS2);
     let dkS3 = localStorage.getItem('dragonlingSkillThree');
-      Dragonling.skill3 = parseInt(dkS3);
+      Dragonling.skill3 = parseFloat(dkS3);
     let dkS4 = localStorage.getItem('dragonlingSkillFour');
-      Dragonling.skill4 = parseInt(dkS4);
+      Dragonling.skill4 = parseFloat(dkS4);
     let dkS5 = localStorage.getItem('dragonlingSkillFive');
-      Dragonling.skill5 = parseInt(dkS5);
+      Dragonling.skill5 = parseFloat(dkS5);
     let dkS6 = localStorage.getItem('dragonlingSkillSix');
-      Dragonling.skill6 = parseInt(dkS6);
+      Dragonling.skill6 = parseFloat(dkS6);
     
     //ThunderSerpent
     let tsCount = localStorage.getItem('thunderSerpentCount');
-      ThunderSerpent.count = parseInt(tsCount);
+      ThunderSerpent.count = parseFloat(tsCount);
     let tsDamage = localStorage.getItem('thunderSerpentDamage');
-      ThunderSerpent.damage = parseInt(tsDamage);
+      ThunderSerpent.damage = parseFloat(tsDamage);
     let tsCost = localStorage.getItem('thunderSerpentCost');
-      ThunderSerpent.cost = parseInt(tsCost);
+      ThunderSerpent.cost = parseFloat(tsCost);
     let tsLevel = localStorage.getItem('thunderSerpentLevel');
-      ThunderSerpent.level = parseInt(tsLevel);
+      ThunderSerpent.level = parseFloat(tsLevel);
 
     let tsS1 = localStorage.getItem('thunderSerpentSkillOne');
-      ThunderSerpent.skill1 = parseInt(tsS1);
+      ThunderSerpent.skill1 = parseFloat(tsS1);
     let tsS2 = localStorage.getItem('thunderSerpentSkillTwo');
-      ThunderSerpent.skill2 = parseInt(tsS2);
+      ThunderSerpent.skill2 = parseFloat(tsS2);
     let tsS3 = localStorage.getItem('thunderSerpentSkillThree');
-      ThunderSerpent.skill3 = parseInt(tsS3);
+      ThunderSerpent.skill3 = parseFloat(tsS3);
     let tsS4 = localStorage.getItem('thunderSerpentSkillFour');
-      ThunderSerpent.skill4 = parseInt(tsS4);
+      ThunderSerpent.skill4 = parseFloat(tsS4);
     let tsS5 = localStorage.getItem('thunderSerpentSkillFive');
-      ThunderSerpent.skill5 = parseInt(tsS5);
+      ThunderSerpent.skill5 = parseFloat(tsS5);
     let tsS6 = localStorage.getItem('thunderSerpentSkillSix');
-      ThunderSerpent.skill6 = parseInt(tsS6);
+      ThunderSerpent.skill6 = parseFloat(tsS6);
     
     //Run some visuals to set items to their correct amount visually
     setInitialBackgrounds();
@@ -2712,9 +2718,9 @@ let floatingGoldText = function(){
 //Reincarnation - Set it all back to original!!!! (minus the earned bonuses of course!)
 
 let reincarnation = function() {
+  player.damageIncreaseRP = player.damageIncreaseRP + (player.nextReincarPoints * .02);
   player.reincarPoints += player.nextReincarPoints;
   player.totalOveralRP += player.nextReincarPoints;
-  player.damageIncreaseRP = player.damageIncreaseRP + (player.nextReincarPoints * .02);
   
   setInitialBackgrounds();
   
