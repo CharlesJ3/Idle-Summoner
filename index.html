@@ -251,7 +251,7 @@
     <p id="tutThree" class="funBorderOne">TOOLTIPS - If you aren't quite sure what something does, try hovering over it and reading the text to get valuable information!</p>
     <p id="tutFour" class="funBorderOne">YOUR STATS - Here is general information about you and your pets.</p>
     <p id="tutFive" class="funBorderOne">ENEMY STATS - Here is general information about your enemy.</p>
-    <p id="tutSix" class="important">IMPORTANT - Reincarnation - Every 5 levels gives you one RP (Reincarnation Point) AFTER you use Reincarnation <br><br> Use RP in the Reincarnation Tree to improve your minions (UPDATES COMING SOON!) <br><br> Reincarnation is available in the settings menu and will reset all of your minions, enemies, and stats EXCEPT RP and RP talents.</p>
+    <p id="tutSix" class="important">IMPORTANT - Reincarnation - Every 5 levels gives you one RP (Reincarnation Point) AFTER you use Reincarnation <br><br> Use RP in the Reincarnation Tree to improve your minions<br><br> Reincarnation is available in the settings menu and will reset all of your minions, enemies, and stats EXCEPT RP and RP talents.</p>
   </div>
   
   <!-- Talents -->
@@ -297,12 +297,20 @@
       
       <div id="talentSixOne" class="buttonTypeSeven RPHover" onclick='talentOneFifteen()' data-title=
            ""></div>
-        <p data-title="Resets everything back to zero except Reincarnation Points (RP). Use RP to increase various stats and make fighting enemies easier." id="reincarStart" onclick='reincarnation()'><span>Reincarnation</span><br><span id="reincarnation">0 <br> RP Gain</span></p>
+        <p data-title="Resets everything back to zero except Reincarnation Points (RP). Use RP to increase various stats and make fighting enemies easier. CLICK THE SMALL BLUE BUTTON IN THE LOWER-RIGHT CORNER TO CONFIRM YOUR CHOICE" id="reincarStart"><span>Reincarnation</span><br><span id="reincarnation">0 <br> RP Gain</span><div id="clickReincar" onclick='reincarnation()'></div></p>
       
       <div id="totalRPCount" data-title="Your RP to spend"></div>
       <div id="totalOverallRPCount" data-title="Your Overall RP across all Reincarnations"></div>
       <button id="resetRP" class="buttonTypeOne" data-title="Reset your RP. Feel free to experiment without worrying about permanence!" type='button' onclick='resetRP()'>Reset RP</button>
       
+      
+      <div id="costMultiplier2">
+        <div id="costMultiplierOne2" class="buttonCostMultiplier" onclick='costMultiplyOne2()'><br>x1</div>
+        <div id="costMultiplierTwo2" class="buttonCostMultiplier" onclick='costMultiplyTwo2()'><br>x10</div>
+        <div id="costMultiplierThree2" class="buttonCostMultiplier" onclick='costMultiplyThree2()'><br>x25</div>
+        <div id="costMultiplierFour2" class="buttonCostMultiplier" onclick='costMultiplyFour2()'><br>x100</div>
+        <div id="costMultiplierFive2" class="buttonCostMultiplier" onclick='costMultiplyFive2()'><br>MAX</div>
+      </div>
       
     </div> 
   </div>
@@ -311,16 +319,20 @@
   <input onclick="checkForSettings()" id="tmodalSettings" type="checkbox" data-show="" data-hide=""/>
   <div class="modalSettings">
     <h1>Settings Menu</h1>
-    <h1 id="setOne">Save, Load, and Reset Your Game</h1>
+    <h1 id="setOne">Save and Load your Game</h1>
     <br><br><br><br><br><br><br>
     <h1 id="setTwo">Credits</h1>
     <p id="setThree">Programming and Developed By: <br> Charles Jones, <a href="http://charlesjones.me/" target="_blank">My Site</a> <br><br> \Art/Graphics: <br> Charles Jones, and Opengameart.org, I'm glad you exist to supplement my art "skills". Specific attribution to: <br> Zeyu Ren 任泽宇, LordNeo, J. W. Bjerk (eleazzaar)<br><br><p>Special thanks to beta testers <!--TODO: Add beta testers to thank you list--></p>
     <!-- Save / Load System - TODO: RESET BUTTOn -->
       <div id="saveAndLoad">
-        <button id="saveGameButton" class="buttonTypeOne" type='button' onclick='saveGame()'>Save</button>
-        <button id="loadGameButton" class="buttonTypeOne" type='button' onclick='loadGame()'>Load</button>
-        <button id="resetGameButton" class="buttonTypeOne" type='button' onclick='resetGame()'>Reset(n/a)</button>
+        <div id="saveGameButton" class="saveAndLoadStyle" data-title="Save your current game. WARNING: Saving will overwrite your current locally saved game. This will not work if you are playing in incognito or private mode." onclick='saveGame()'>Save</div>
+        <div id="loadGameButton" class="saveAndLoadStyle" onclick='loadGame()'>Load</div>
+        <div id="autoSaveButton" class="saveAndLoadStyleTwo" data-title="Autosaves every 30 seconds, and lets you know when you last autosaved. WARNING: Turning on Autosave without loading your game will overwrite it. Please make sure you have loaded the correct game before you turn this on!" onclick='setAutoSave()'>Autosave</div>
         <br>
+      </div>
+       <div id="saveAndLoadTwo">
+        <div id="saveNotice"></div>
+        <div id="saveNoticeTwo"></div>
         <br>
       </div>
   </div>  
@@ -352,8 +364,8 @@
     <div id="floatingThunderSerpentDamage"></div>
     <div id="floatingGoldText"></div>
   </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/jquery-ui.min.js"></script>
 <script src="scripts/main.js"></script>
 </body>
 </html>

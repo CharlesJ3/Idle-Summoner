@@ -10,28 +10,35 @@ Issue 2 - Several load fields are not the same as the newly-changed values; matc
 
 
 Issue 3 - Several reincarnation fields MAY not be the same, more testing to verify this
-Issue 4 - What do you do post level 500 with your minions? I've never gotten there but someone might. Prestige them? 
+Issue 4 - What do you do post level 500 with your minions? I've never gotten there but someone might. Prestige them? Bonus after 500?
 Issue 5 - Add several more levels to Number Conversion
 Issue 6 - Check TODO and REFACTOR comments
 Issue 7 - Front UI/UX needs to be improved. Nothing major but easier to read and navigate is a must
 Issue 8 - Several talent fields MAY not be the same, more testing to verify this
 Issue 9 - Balancing speed issue; make sure no speed can reach infinity or it will crash the game
 Issue 10 - At least a better attempt at rebalancing. There is nothing to do past level 
+
+
 Issue 11 - A possible way to help balancing is to slow the process down; as in don't make things easier or harder, but lower the numbers in general. 
-           Things get to high numbers way too easy.
+           Things get to high numbers way too easy
+           UPDATE: Lowered numbers and smoothed out midgame. Testing in progress
            
            
 Issue 12 - Autosave system
         
 
+Issue 13 - FINISH THE ENEMY! NO MERCY!
 
+Issue 14 - Base damage for talents could be updated a bit; they aren't affected by multiplier so I need to at least increase the flat damage. 
 
+IMPORTANT -
 
+        Around 67 overall RP, the gold and/or xp multiplier is too high; for example it seems like it is multiplying twice or something
 
 Game Additions List ("Nice before launch but not necessary"):
 
 
-Issue 1 - Tutorial needs to be easier to comprehend
+Issue 1 - Tutorial needs overhauls
 Issue 2 - Possibly a FAQ section
 Issue 3 - Nicer, cleaner UI
 Issue 4 - Research a cloud save system (node.js)

@@ -57,7 +57,6 @@ let drawBorders = function() {
   context.moveTo(75, 159);
   context.lineTo(75, 1);
   context.stroke();
-  //
 
   //Vertical Line 1 - Left
   context.beginPath();
@@ -138,7 +137,8 @@ let player = {
   bonusRPTalentFifteen: 0,
   bonusRPTalentFifteenMax: 25,
   bonusRPTalentFifteenCost: 10,
-	costMultiplier: 1
+	costMultiplier: 1,
+  autoSaveSelection: 0
 }
 
 //Pet Object, TODO: Possibly more pet properties that deal with modifiers (such as poison, crit, etc.)
@@ -250,7 +250,7 @@ let autoattackSkeleton = function(){
   enemy.currentEnemyHealth -= ((Skeleton.damage + Skeleton.addDam) * Skeleton.count) * player.damageIncreaseRP;
   
   
-  //This will make sure this 
+  //This will make sure this runs again after finishing the timeout OUTSIDE of the function
   var timeoutGraphicSkeleton =  setTimeout(autoattackSkeleton, finalSkeletonSpeed);
   
 }
@@ -474,7 +474,8 @@ let enemyLevelSystem = function(){
   if(enemy.toNextLevel === enemy.toNextLevelMax){
       enemy.toNextLevel = 0;
       
-      //Determines
+      //Determines enemy health. Use this section for general balancing
+      //IDEA:
       if(enemy.level < 10 && enemy.level > 0){
       enemy.maxEnemyHealth *= 1.315;
       }
@@ -482,7 +483,7 @@ let enemyLevelSystem = function(){
       enemy.maxEnemyHealth *= 1.335;
       }
       if(enemy.level > 50){
-      enemy.maxEnemyHealth *= 1.415;
+      enemy.maxEnemyHealth *= 1.355;
       }
     
       enemy.level++;
@@ -494,44 +495,82 @@ let enemyLevelSystem = function(){
 
 let enemyBackground = function(){
 
-  if(enemy.level < 2){
+  if(enemy.level < 5){
     document.getElementById("enemyOne").src="images/orc_zumbi.png";
   }
-  else if(enemy.level < 5){
+  else if(enemy.level < 10){
     document.getElementById("enemyOne").src="images/BanditBeigeGold.png";
   }
   
   
-  else if(enemy.level < 9){
+  else if(enemy.level < 15){
     document.getElementById("enemyOne").src="images/bathornetgreen.png";
   }
-  else if(enemy.level < 14){
+  else if(enemy.level < 20){
     document.getElementById("enemyOne").src="images/BanditWhiteGrey.png";
   }
-  else if(enemy.level < 19){
+  else if(enemy.level < 25){
     document.getElementById("enemyOne").src="images/orc_zumbi.png";
   }
   
-  else if(enemy.level < 24){
+  else if(enemy.level < 30){
     document.getElementById("enemyOne").src="images/bathornetblue.png";
   }
-  else if(enemy.level < 29){
+  else if(enemy.level < 35){
     document.getElementById("enemyOne").src="images/BanditBlackRed.png";
   }
-  else if(enemy.level < 34){
+  else if(enemy.level < 40){
     document.getElementById("enemyOne").src="images/orc_stone.png";
   }
-  else if(enemy.level < 39){
+  else if(enemy.level < 45){
     document.getElementById("enemyOne").src="images/BanditBlueDarkBlue.png";
   }
-  else if(enemy.level < 44){
+  else if(enemy.level < 50){
     document.getElementById("enemyOne").src="images/orc_zumbi_2.png";
   }
-  else if(enemy.level < 49){
+  else if(enemy.level < 55){
     document.getElementById("enemyOne").src="images/bathornetred.png";
   }
-  else if(enemy.level < 54){
-    document.getElementById("enemyOne").src="images/orc_hig.png";//dup
+  else if(enemy.level < 60){
+    document.getElementById("enemyOne").src="images/orc_hig.png";
+  }
+  else if(enemy.level < 65){
+    document.getElementById("enemyOne").src="images/orc_zumbi.png";
+  }
+  else if(enemy.level < 70){
+    document.getElementById("enemyOne").src="images/BanditBeigeGold.png";
+  }
+  
+  else if(enemy.level < 75){
+    document.getElementById("enemyOne").src="images/bathornetgreen.png";
+  }
+  else if(enemy.level < 80){
+    document.getElementById("enemyOne").src="images/BanditWhiteGrey.png";
+  }
+  else if(enemy.level < 85){
+    document.getElementById("enemyOne").src="images/orc_zumbi.png";
+  }
+  
+  else if(enemy.level < 90){
+    document.getElementById("enemyOne").src="images/bathornetblue.png";
+  }
+  else if(enemy.level < 95){
+    document.getElementById("enemyOne").src="images/BanditBlackRed.png";
+  }
+  else if(enemy.level < 100){
+    document.getElementById("enemyOne").src="images/orc_stone.png";
+  }
+  else if(enemy.level < 105){
+    document.getElementById("enemyOne").src="images/BanditBlueDarkBlue.png";
+  }
+  else if(enemy.level < 110){
+    document.getElementById("enemyOne").src="images/orc_zumbi_2.png";
+  }
+  else if(enemy.level < 115){
+    document.getElementById("enemyOne").src="images/bathornetred.png";
+  }
+  else if(enemy.level < 120){
+    document.getElementById("enemyOne").src="images/orc_hig.png";
   }
   
 
@@ -545,10 +584,34 @@ let enemyBackground = function(){
     document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-snow.png')";
   }
   else if(enemy.level < 31){
-    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-rock.png')";
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-city.png')";
   }
   else if(enemy.level < 41){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-rock.png')";
+  }
+  else if(enemy.level < 51){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-swamp.png')";
+  }
+  else if(enemy.level < 61){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-snow.png')";
+  }
+  else if(enemy.level < 71){
     document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-city.png')";
+  }
+  else if(enemy.level < 81){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-rock.png')";
+  }
+  else if(enemy.level < 91){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-swamp.png')";
+  }
+  else if(enemy.level < 11){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-snow.png')";
+  }
+  else if(enemy.level < 111){
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-city.png')";
+  }
+  else if(enemy.level < 121){``
+    document.getElementById("enemyFrontInterface").style.backgroundImage = "url('images/background-rock.png')";
   }
 }
 
@@ -619,26 +682,18 @@ let levelUpPlayer = function(){
     player.exp = 0;
     
     if(player.level <= 75){
+      player.maxXp *= 1.15;
+    }
+    
+    if(player.level <= 150 && player.level < 75){
       player.maxXp *= 1.20;
     }
     
-    if(player.level <= 100 && player.level < 75){
-      player.maxXp *= 1.25;
-    }
-    
-    if(player.level > 100){
-      player.maxXp *= 1.30;
+    if(player.level > 150){
+      player.maxXp *= 1.225;
     }
   }
 }
-
-
-/*
-* -------------------------------
-* Skills and Upgrades
-* -------------------------------
-*/
-
 
 /*
 *
@@ -649,9 +704,9 @@ let skeletonSkillFirst = function(){
 
   if(Skeleton.count >= 10 && Skeleton.skill1 !== 1){
     Skeleton.skill1 = 1;
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Skeleton.damage *= 1.4;
+    
+    //Skill upgrade
+    Skeleton.damage *= 3.5;
     Skeleton.speed *= .90;
   }
 }
@@ -661,9 +716,8 @@ let skeletonSkillSecond = function(){
   if(Skeleton.count >= 25 && Skeleton.skill2 !== 1){
     Skeleton.skill2 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #2 - 50% damage, %25 faster attack
-    Skeleton.damage *= 2;
+    //Skill upgrade
+    Skeleton.damage *= 4.5;
     Skeleton.speed *= .85;
   }
 }
@@ -674,9 +728,8 @@ let skeletonSkillThird = function(){
   if(Skeleton.count >= 50 && Skeleton.skill3 !== 1){
     Skeleton.skill3 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Skeleton.damage *= 4;
+    //Skill upgrade
+    Skeleton.damage *= 7;
     Skeleton.speed *= .85;
   }
 }
@@ -687,9 +740,8 @@ let skeletonSkillFourth = function(){
   if(Skeleton.count >= 100 && Skeleton.skill4 !== 1){
     Skeleton.skill4 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Skeleton.damage *= 10;
+    //Skill upgrade
+    Skeleton.damage *= 8;
     Skeleton.speed *= .75;
   }
 }
@@ -700,9 +752,8 @@ let skeletonSkillFifth = function(){
   if(Skeleton.count >= 250 && Skeleton.skill5 !== 1){
     Skeleton.skill5 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 200% damage
-    Skeleton.damage *= 8;
+    //Skill upgrade
+    Skeleton.damage *= 8.5;
     Skeleton.speed *= .75;
   }
 }
@@ -713,9 +764,8 @@ let skeletonSkillSixth = function(){
   if(Skeleton.count >= 500 && Skeleton.skill6 !== 1){
     Skeleton.skill6 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 1200% damage
-    Skeleton.damage *= 10;
+    //Skill upgrade
+    Skeleton.damage *= 9;
     Skeleton.speed *= .70;
   }
 }
@@ -731,9 +781,8 @@ let frostGiantSkillFirst = function(){
   if(FrostGiant.count >= 10 && FrostGiant.skill1 !== 1){
     FrostGiant.skill1 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    FrostGiant.damage *= 2;
+    //Skill upgrade
+    FrostGiant.damage *= 3;
     FrostGiant.speed *= .75;
   }
 }
@@ -743,9 +792,8 @@ let frostGiantSkillSecond = function(){
   if(FrostGiant.count >= 25 && FrostGiant.skill2 !== 1){
     FrostGiant.skill2 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #2 - 50% damage, %25 faster attack
-    FrostGiant.damage *= 3;
+    //Skill upgrade
+    FrostGiant.damage *= 4;
     FrostGiant.speed *= .75;
   }
 }
@@ -756,8 +804,7 @@ let frostGiantSkillThird = function(){
   if(FrostGiant.count >= 50 && FrostGiant.skill3 !== 1){
     FrostGiant.skill3 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
+    //Skill upgrade
     FrostGiant.damage *= 5;
     FrostGiant.speed *= .95;
   }
@@ -769,9 +816,8 @@ let frostGiantSkillFourth = function(){
   if(FrostGiant.count >= 100 && FrostGiant.skill4 !== 1){
     FrostGiant.skill4 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    FrostGiant.damage *= 10;
+    //Skill upgrade
+    FrostGiant.damage *= 5;
     FrostGiant.speed *= .35;
   }
 }
@@ -782,9 +828,8 @@ let frostGiantSkillFifth = function(){
   if(FrostGiant.count >= 250 && FrostGiant.skill5 !== 1){
     FrostGiant.skill5 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    FrostGiant.damage *= 9;
+    //Skill upgrade
+    FrostGiant.damage *= 6;
     FrostGiant.speed *= .75;
   }
 }
@@ -795,9 +840,8 @@ let frostGiantSkillSixth = function(){
   if(FrostGiant.count >= 500 && FrostGiant.skill6 !== 1){
     FrostGiant.skill6 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    FrostGiant.damage *= 12;
+    //Skill upgrade
+    FrostGiant.damage *= 7;
     FrostGiant.speed *= .70;
   }
 }
@@ -812,9 +856,8 @@ let dragonlingSkillFirst = function(){
   if(Dragonling.count >= 10 && Dragonling.skill1 !== 1){
     Dragonling.skill1 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Dragonling.damage *= 2;
+     //Skill upgrade
+    Dragonling.damage *= 2.5;
     Dragonling.speed *= .85;
   }
 }
@@ -824,9 +867,8 @@ let dragonlingSkillSecond = function(){
   if(Dragonling.count >= 25 && Dragonling.skill2 !== 1){
     Dragonling.skill2 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #2 - 50% damage, %25 faster attack
-    Dragonling.damage *= 3;
+    //Skill upgrade
+    Dragonling.damage *= 3.5;
     Dragonling.speed *= .70;
   }
 }
@@ -837,8 +879,7 @@ let dragonlingSkillThird = function(){
   if(Dragonling.count >= 50 && Dragonling.skill3 !== 1){
     Dragonling.skill3 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
+    //Skill upgrade
     Dragonling.damage *= 5;
     Dragonling.speed *= .70;
   }
@@ -850,9 +891,8 @@ let dragonlingSkillFourth = function(){
   if(Dragonling.count >= 100 && Dragonling.skill4 !== 1){
     Dragonling.skill4 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Dragonling.damage *= 10;
+    //Skill upgrade
+    Dragonling.damage *= 6;
     Dragonling.speed *= .70;
   }
 }
@@ -863,9 +903,8 @@ let dragonlingSkillFifth = function(){
   if(Dragonling.count >= 250 && Dragonling.skill5 !== 1){
     Dragonling.skill5 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Dragonling.damage *= 11;
+    //Skill upgrade
+    Dragonling.damage *= 7;
     Dragonling.speed *= .65;
   }
 }
@@ -876,9 +915,8 @@ let dragonlingSkillSixth = function(){
   if(Dragonling.count >= 500 && Dragonling.skill6 !== 1){
     Dragonling.skill6 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    Dragonling.damage *= 15;
+    //Skill upgrade
+    Dragonling.damage *= 8;
     Dragonling.speed *= .55;
   }
 }
@@ -894,9 +932,8 @@ let thunderSerpentSkillFirst = function(){
   if(ThunderSerpent.count >= 10 && ThunderSerpent.skill1 !== 1){
     ThunderSerpent.skill1 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 2.5;
+     //Skill upgrade
+    ThunderSerpent.damage *= 3;
     ThunderSerpent.speed *= .75;
   }
 }
@@ -906,8 +943,7 @@ let thunderSerpentSkillSecond = function(){
   if(ThunderSerpent.count >= 25 && ThunderSerpent.skill2 !== 1){
     ThunderSerpent.skill2 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #2 - 50% damage, %25 faster attack
+    //Skill upgrade
     ThunderSerpent.damage *= 5;
     ThunderSerpent.speed *= .75;
   }
@@ -919,9 +955,8 @@ let thunderSerpentSkillThird = function(){
   if(ThunderSerpent.count >= 50 && ThunderSerpent.skill3 !== 1){
     ThunderSerpent.skill3 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 8;
+    //Skill upgrade
+    ThunderSerpent.damage *= 6;
     ThunderSerpent.speed *= .75;
   }
 }
@@ -932,9 +967,8 @@ let thunderSerpentSkillFourth = function(){
   if(ThunderSerpent.count >= 100 && ThunderSerpent.skill4 !== 1){
     ThunderSerpent.skill4 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 10;
+    //Skill upgrade
+    ThunderSerpent.damage *= 6.5;
     ThunderSerpent.speed *= .75;
   }
 }
@@ -945,9 +979,8 @@ let thunderSerpentSkillFifth = function(){
   if(ThunderSerpent.count >= 250 && ThunderSerpent.skill5 !== 1){
     ThunderSerpent.skill5 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 14;
+    //Skill upgrade
+    ThunderSerpent.damage *= 7.5;
     ThunderSerpent.speed *= .75;
   }
 }
@@ -958,10 +991,8 @@ let thunderSerpentSkillSixth = function(){
   if(ThunderSerpent.count >= 500 && ThunderSerpent.skill6 !== 1){
     ThunderSerpent.skill6 = 1;
 
-    //Template above is finished, do custom skill below
-    //Skill #1 - 100% damage
-    ThunderSerpent.damage *= 17;
-    ThunderSerpent.speed *= .60;
+    //Skill upgrade
+    ThunderSerpent.damage *= 10;
   }
 }
 
@@ -1352,6 +1383,8 @@ let helpNegativeGold = function(){
   }
 }
 
+
+//look... this is ok for now but REFACTOR this beast before you forget and hate yourself when someone sees this monstrosity
 let showStats = function(){
   //Player
   document.getElementById('charGold').innerHTML = "Gold <br>" + nFormatter(helpNegativeGold());  
@@ -1474,7 +1507,7 @@ $("#toggleThunderSerpentSkillsBack").click(function() {
 //Skeleton
 $("#skeletonSkillOneHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>Bone Spikes</p><p class='notifyDescription'>Attach spikes of bone to your Skeleton's weapons<br><br>Damage: x1.4<br><br>Attack Speed: +10%</p>"
+    "<p class='notifyTitleSk'>Bone Spikes</p><p class='notifyDescription'>Attach spikes of bone to your Skeleton's weapons<br><br>Damage: x3.5<br><br>Attack Speed: +10%</p>"
   ), $('#notificationArea').css('background-image','url(skills/needles-sky-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1483,7 +1516,7 @@ $("#skeletonSkillOneHover").hover(function() {
 
 $("#skeletonSkillTwoHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>Bonewhirl</p><p class='notifyDescription'>A fast attack meant to swarm enemies<br><br>Damage: x2<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleSk'>Bonewhirl</p><p class='notifyDescription'>A fast attack meant to swarm enemies<br><br>Damage: x4.5<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/air-burst-sky-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1492,7 +1525,7 @@ $("#skeletonSkillTwoHover").hover(function() {
 
 $("#skeletonSkillThreeHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>Stardust</p><p class='notifyDescription'>Invigorating meteor rain; also hurts the enemy<br><br>Damage: x4<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleSk'>Stardust</p><p class='notifyDescription'>Invigorating meteor rain; also hurts the enemy<br><br>Damage: x7<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fire-arrows-sky-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1501,7 +1534,7 @@ $("#skeletonSkillThreeHover").hover(function() {
 
 $("#skeletonSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x10<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleSk'>The Fog</p><p class='notifyDescription'>A mist that increases vitality and awareness<br><br>Damage: x8<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fog-sky-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1510,7 +1543,7 @@ $("#skeletonSkillFourHover").hover(function() {
 
 $("#skeletonSkillFiveHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'>Multi-strike</p><p class='notifyDescription'>Attacks in quick succession, confusing the enemy<br><br>Damage: x8<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleSk'>Multi-strike</p><p class='notifyDescription'>Attacks in quick succession, confusing the enemy<br><br>Damage: x8.5<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/shielding-spirit-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1519,7 +1552,7 @@ $("#skeletonSkillFiveHover").hover(function() {
 
 $("#skeletonSkillSixHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleSk'a>Towering Strike</p><p class='notifyDescription'>A bone-rattling strike, pun intended <br><br>Damage: x10<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleSk'a>Towering Strike</p><p class='notifyDescription'>A bone-rattling strike, pun intended <br><br>Damage: x9<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/slice-sky-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1533,7 +1566,7 @@ $("#skeletonSkillSixHover").hover(function() {
 //Frost Giant
 $("#frostGiantSkillOneHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Frost Breath</p><p class='notifyDescription'>A frosty breath that slows enemies movement, making them easier to hit<br><br>Damage: x2<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleFg'>Frost Breath</p><p class='notifyDescription'>A frosty breath that slows enemies movement, making them easier to hit<br><br>Damage: x3<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fog-blue-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1542,7 +1575,7 @@ $("#frostGiantSkillOneHover").hover(function() {
 
 $("#frostGiantSkillTwoHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Small Frost Comet</p><p class='notifyDescription'>A small but vicious hunk of ice is called down upon the enemy<br><br>Damage: x3<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleFg'>Small Frost Comet</p><p class='notifyDescription'>A small but vicious hunk of ice is called down upon the enemy<br><br>Damage: x4<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/light-blue-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1560,7 +1593,7 @@ $("#frostGiantSkillThreeHover").hover(function() {
 
 $("#frostGiantSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 10x<br><br>Attack Speed: +65%</p>"
+    "<p class='notifyTitleFg'>Burst of Speed</p><p class='notifyDescription'>They say Frost Giant's are slow. Pretty sure they are right, at least most of the time.<br><br>Damage: 5x<br><br>Attack Speed: +65%</p>"
   ), $('#notificationArea').css('background-image','url(skills/needles-blue-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1569,7 +1602,7 @@ $("#frostGiantSkillFourHover").hover(function() {
 
 $("#frostGiantSkillFiveHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'>Glacial Trap</p><p class='notifyDescription'>Throw at the enemy to slow their movement speed and increase their damage taken<br><br>Damage: x9<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleFg'>Glacial Trap</p><p class='notifyDescription'>Throw at the enemy to slow their movement speed and increase their damage taken<br><br>Damage: x6<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/shielding-eerie-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1578,7 +1611,7 @@ $("#frostGiantSkillFiveHover").hover(function() {
 
 $("#frostGiantSkillSixHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleFg'a>Grasp of Ymir</p><p class='notifyDescription'>A frozen tendril pierces the enemy with frozen rocks and ice.<br><br>Damage: x12<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleFg'a>Grasp of Ymir</p><p class='notifyDescription'>A frozen tendril pierces the enemy with frozen rocks and ice.<br><br>Damage: x7<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/wind-grasp-eerie-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1592,7 +1625,7 @@ $("#frostGiantSkillSixHover").hover(function() {
 //Dragonling
 $("#dragonlingSkillOneHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Meteor Fall</p><p class='notifyDescription'>Meteors rain from the sky, causing fire damage and emboldening the dragonling.<br><br>Damage: x2<br><br>Attack Speed: +15%</p>"
+    "<p class='notifyTitleDr'>Meteor Fall</p><p class='notifyDescription'>Meteors rain from the sky, causing fire damage and emboldening the dragonling.<br><br>Damage: x2.5<br><br>Attack Speed: +15%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fire-arrows-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1601,7 +1634,7 @@ $("#dragonlingSkillOneHover").hover(function() {
 
 $("#dragonlingSkillTwoHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Firespin</p><p class='notifyDescription'>The dragonling spins around quickly, shooting gusts of blazing-hot wind towards the enemy<br><br>Damage: x3<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleDr'>Firespin</p><p class='notifyDescription'>The dragonling spins around quickly, shooting gusts of blazing-hot wind towards the enemy<br><br>Damage: x3.5<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/fog-orange-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1619,7 +1652,7 @@ $("#dragonlingSkillThreeHover").hover(function() {
 
 $("#dragonlingSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x10<br><br>Attack Speed: +30%</p>"
+    "<p class='notifyTitleDr'>Snaplock</p><p class='notifyDescription'>A fast, clean strike to the enemies weak point<br><br>Damage: x6<br><br>Attack Speed: +30%</p>"
   ), $('#notificationArea').css('background-image','url(skills/rip-acid-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1628,7 +1661,7 @@ $("#dragonlingSkillFourHover").hover(function() {
 
 $("#dragonlingSkillFiveHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'>Lava Rift</p><p class='notifyDescription'>A dark, fiery chasm appears beneath the enemy<br><br>Damage: x11<br><br>Attack Speed: +35%</p>"
+    "<p class='notifyTitleDr'>Lava Rift</p><p class='notifyDescription'>A dark, fiery chasm appears beneath the enemy<br><br>Damage: x7<br><br>Attack Speed: +35%</p>"
   ), $('#notificationArea').css('background-image','url(skills/rip-magenta-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1637,7 +1670,7 @@ $("#dragonlingSkillFiveHover").hover(function() {
 
 $("#dragonlingSkillSixHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleDr'a>UNLEASH</p><p class='notifyDescription'>The shackles are cut, releasing the full power of the dragonling<br><br>Damage: x15<br><br>Attack Speed: +45%</p>"
+    "<p class='notifyTitleDr'a>UNLEASH</p><p class='notifyDescription'>The shackles are cut, releasing the full power of the dragonling<br><br>Damage: x8<br><br>Attack Speed: +45%</p>"
   ), $('#notificationArea').css('background-image','url(skills/slice-orange-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1652,7 +1685,7 @@ $("#dragonlingSkillSixHover").hover(function() {
 //Thunder Serpent
 $("#thunderSerpentSkillOneHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleTs'>Lightning Swirl</p><p class='notifyDescription'>A static burst of energy. Bolsters courage in the serpent, increasing damage and attack speed<br><br>Damage: x2.5<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleTs'>Lightning Swirl</p><p class='notifyDescription'>A static burst of energy. Bolsters courage in the serpent, increasing damage and attack speed<br><br>Damage: x3<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/air-burst-air-2.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1670,7 +1703,7 @@ $("#thunderSerpentSkillTwoHover").hover(function() {
 
 $("#thunderSerpentSkillThreeHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleTs'>Lightning Ball</p><p class='notifyDescription'>Flings a ball of lightning at the enemy<br><br>Damage: x8<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleTs'>Lightning Ball</p><p class='notifyDescription'>Flings a ball of lightning at the enemy<br><br>Damage: x6<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/light-eerie-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1679,7 +1712,7 @@ $("#thunderSerpentSkillThreeHover").hover(function() {
 
 $("#thunderSerpentSkillFourHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleTs'>Star Freefall</p><p class='notifyDescription'>Rains down highly charged matter at the enemy from long distances<br><br>Damage: x10<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleTs'>Star Freefall</p><p class='notifyDescription'>Rains down highly charged matter at the enemy from long distances<br><br>Damage: x6.5<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/light-sky-1.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1688,7 +1721,7 @@ $("#thunderSerpentSkillFourHover").hover(function() {
 
 $("#thunderSerpentSkillFiveHover").hover(function() {
   $("#notificationOne").html(
-    "<p class='notifyTitleTs'>Fissure</p><p class='notifyDescription'>Streams highly volatile, positively charged fluid at the enemy, binding them in the process<br><br>Damage: x14<br><br>Attack Speed: +25%</p>"
+    "<p class='notifyTitleTs'>Fissure</p><p class='notifyDescription'>Streams highly volatile, positively charged fluid at the enemy, binding them in the process<br><br>Damage: x7.5<br><br>Attack Speed: +25%</p>"
   ), $('#notificationArea').css('background-image','url(skills/link-spirit-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1697,7 +1730,7 @@ $("#thunderSerpentSkillFiveHover").hover(function() {
 
 $("#thunderSerpentSkillSixHover").hover(function() {
   $("#notificationOne").html(
-   "<p class='notifyTitleTs'>Time Shards</p><p class='notifyDescription'>Shards that can literally slow down time, increasing damage to the enemy and showering them with lightning<br><br>Damage: x17<br><br>Attack Speed: +40%</p>"
+   "<p class='notifyTitleTs'>Time Shards</p><p class='notifyDescription'>Shards that can literally slow down time, increasing damage to the enemy and showering them with lightning<br><br>Damage: x10<br></p>"
   ), $('#notificationArea').css('background-image','url(skills/needles-sky-3.png)');
     }, function(){
       //Works as a mouseover to clear the current notification area
@@ -1767,7 +1800,6 @@ let checkForTutorial = function(){
 */
 
 //Settings section is a copy of the tutorial with a different action
-
 let checkForSettings = function(){
   
   if(!$('#tmodalSettings').prop('checked')) {
@@ -1901,8 +1933,6 @@ let talentTreeInitialDescriptions = function(){
   
 }
 
-console.log(null == undefined);
-
 talentTreeInitialDescriptions();
 
 /*
@@ -1912,271 +1942,267 @@ talentTreeInitialDescriptions();
 */
 
 let talentOneOne = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentOne < player.bonusRPTalentOneMax && player.bonusRPTalentOneCost <= player.reincarPoints){
-    player.bonusRPTalentOne++;
-    
-  //Actual Talent Effect and subtraction of reincarnation points
-    player.reincarPoints -= player.bonusRPTalentOneCost;
-    Skeleton.addDam += .5;
+  for(let x = 0; x < player.costMultiplier2; x++){
+ 
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentOne < player.bonusRPTalentOneMax && player.bonusRPTalentOneCost <= player.reincarPoints){
+      player.bonusRPTalentOne++;
+
+    //Actual Talent Effect and subtraction of reincarnation points
+      player.reincarPoints -= player.bonusRPTalentOneCost;
+      Skeleton.addDam += 1;
+    }
+
+    //Section to visually show the updates
+    $("#talentOneOne").html(
+      "<p class='talentTitle'>Skeleton Dam+ <br><span>" + player.bonusRPTalentOne + " / " + player.bonusRPTalentOneMax + "</span><br><span>+ " + Skeleton.addDam + "<br> Cost: " + player.bonusRPTalentOneCost + "</span></p>"
+    )
   }
-  
-  //Section to visually show the updates
-  $("#talentOneOne").html(
-    "<p class='talentTitle'>Skeleton Dam+ <br><span>" + player.bonusRPTalentOne + " / " + player.bonusRPTalentOneMax + "</span><br><span>+ " + Skeleton.addDam + "<br> Cost: " + player.bonusRPTalentOneCost + "</span></p>"
-  )
-  
 }
 
 let talentOneTwo = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentTwo < player.bonusRPTalentTwoMax && player.bonusRPTalentTwoCost <= player.reincarPoints){
-    player.bonusRPTalentTwo++;
-    
-  //Actual Talent Effect  
-    player.reincarPoints -= player.bonusRPTalentTwoCost;
-    Skeleton.addSpeed += 10;
+  for(let x = 0; x < player.costMultiplier2; x++){  
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentTwo < player.bonusRPTalentTwoMax && player.bonusRPTalentTwoCost <= player.reincarPoints){
+      player.bonusRPTalentTwo++;
+
+    //Actual Talent Effect  
+      player.reincarPoints -= player.bonusRPTalentTwoCost;
+      Skeleton.addSpeed += 10;
+    }
+
+    //Section to visually show the updates
+    $("#talentOneTwo").html(
+      "<p class='talentTitle'>Skeleton Spd+ <br><span>" + player.bonusRPTalentTwo + " / " + player.bonusRPTalentTwoMax + "</span><br><span>- " + (Skeleton.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentTwoCost + "</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentOneTwo").html(
-    "<p class='talentTitle'>Skeleton Spd+ <br><span>" + player.bonusRPTalentTwo + " / " + player.bonusRPTalentTwoMax + "</span><br><span>- " + (Skeleton.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentTwoCost + "</span></p>"
-  ); 
-  
 }
   
 let talentOneThree = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentThree < player.bonusRPTalentThreeMax && player.bonusRPTalentThreeCost <= player.reincarPoints) {
-    
-    player.reincarPoints -= player.bonusRPTalentThreeCost;
-    player.bonusRPTalentThree++;
-    
-    //Smooth leveling process a bit, is too fast when RP multiplies rapidly
-    if(player.bonusRPTalentThree === 1){
-      player.bonusRPTalentThreeCost = 100;
-    }    
-    if(player.bonusRPTalentThree === 2){
-      player.bonusRPTalentThreeCost = 1000;
+  for(let x = 0; x < player.costMultiplier2; x++){  
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentThree < player.bonusRPTalentThreeMax && player.bonusRPTalentThreeCost <= player.reincarPoints) {
+
+      player.reincarPoints -= player.bonusRPTalentThreeCost;
+      player.bonusRPTalentThree++;
+
+      //Smooth leveling process a bit, is too fast when RP multiplies rapidly
+      if(player.bonusRPTalentThree === 1){
+        player.bonusRPTalentThreeCost = 100;
+      }    
+      if(player.bonusRPTalentThree === 2){
+        player.bonusRPTalentThreeCost = 1000;
+      }
+
+
+      //Actual Talent Effect  
+      player.bonusRPCount++;  
     }
-    
-    
-    //Actual Talent Effect  
-    player.bonusRPCount++;  
-  }
-  
+
   //Section to visually show the updates
   $("#talentOneThree").html(
     "<p class='talentTitle'>Increase RP Gain: <br>" + player.bonusRPTalentThree + " / " + player.bonusRPTalentThreeMax + "<br><span>" + player.bonusRPCount + " x RP " +  "<br> Cost: " + player.bonusRPTalentThreeCost + "</span></p>"
   );
+  }
 }
 
 let talentOneFour = function(){
+  for(let x = 0; x < player.costMultiplier2; x++){
+      //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentFour < player.bonusRPTalentFourMax && player.bonusRPTalentFourCost <= player.reincarPoints){
+      player.bonusRPTalentFour++;
 
-    //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentFour < player.bonusRPTalentFourMax && player.bonusRPTalentFourCost <= player.reincarPoints){
-    player.bonusRPTalentFour++;
-    
-  //Actual Talent Effect 
-    player.reincarPoints -= player.bonusRPTalentFourCost;
-    FrostGiant.addDam += .5;
+    //Actual Talent Effect 
+      player.reincarPoints -= player.bonusRPTalentFourCost;
+      FrostGiant.addDam += 1;
+    }
+
+    //Section to visually show the updates
+    $("#talentTwoOne").html(
+      "<p class='talentTitle'>FrostGiant Dam+ <br><span>" + player.bonusRPTalentFour + " / " + player.bonusRPTalentFourMax + "</span><br><span>+ " + FrostGiant.addDam + "<br> Cost: " + player.bonusRPTalentFourCost + "</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentTwoOne").html(
-    "<p class='talentTitle'>FrostGiant Dam+ <br><span>" + player.bonusRPTalentFour + " / " + player.bonusRPTalentFourMax + "</span><br><span>+ " + FrostGiant.addDam + "<br> Cost: " + player.bonusRPTalentFourCost + "</span></p>"
-  ); 
-  
 }
 
 let talentOneFive = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentFive < player.bonusRPTalentFiveMax && player.bonusRPTalentFiveCost <= player.reincarPoints){
-    player.bonusRPTalentFive++;
-    
-  //Actual Talent Effect  
-    player.reincarPoints -= player.bonusRPTalentFiveCost;
-    FrostGiant.addSpeed += 10;
+  for(let x = 0; x < player.costMultiplier2; x++){  
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentFive < player.bonusRPTalentFiveMax && player.bonusRPTalentFiveCost <= player.reincarPoints){
+      player.bonusRPTalentFive++;
+
+    //Actual Talent Effect  
+      player.reincarPoints -= player.bonusRPTalentFiveCost;
+      FrostGiant.addSpeed += 10;
+    }
+
+    //Section to visually show the updates
+    $("#talentTwoTwo").html(
+      "<p class='talentTitle'>FrostGiant Spd+ <br><span>" + player.bonusRPTalentFive + " / " + player.bonusRPTalentFiveMax + "</span><br><span>- " + (FrostGiant.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentFiveCost +"</span></p>"
+    );
   }
-  
-  //Section to visually show the updates
-  $("#talentTwoTwo").html(
-    "<p class='talentTitle'>FrostGiant Spd+ <br><span>" + player.bonusRPTalentFive + " / " + player.bonusRPTalentFiveMax + "</span><br><span>- " + (FrostGiant.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentFiveCost +"</span></p>"
-  );
-	
 } 
 
 let talentOneSix = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentSix < player.bonusRPTalentSixMax && player.bonusRPTalentSixCost <= player.reincarPoints) {
-    
-    player.reincarPoints -= player.bonusRPTalentSixCost;
-    player.bonusRPTalentSix++;
-    
-    
-    //Increase the cost to smooth leveling process
-    if(player.bonusRPTalentSix === 5){
-      player.bonusRPTalentSixCost++;
-    }
-    if(player.bonusRPTalentSix === 10){
-      player.bonusRPTalentSixCost++;
-    }
-    if(player.bonusRPTalentSix === 15){
-      player.bonusRPTalentSixCost++;
-    }
-    if(player.bonusRPTalentSix === 20){
-      player.bonusRPTalentSixCost++;
-    }
+   for(let x = 0; x < player.costMultiplier2; x++){ 
+      //Check Talent for Max before adding to modifier
+      if(player.bonusRPTalentSix < player.bonusRPTalentSixMax && player.bonusRPTalentSixCost <= player.reincarPoints) {
 
-    
-    
-  //Actual Talent Effect  
-  player.goldBonusCount += .02;  
-  }
-  
-  //Section to visually show the updates
-  $("#talentTwoThree").html(
-    "<p class='talentTitle'>Bonus Gold % :<br>" + player.bonusRPTalentSix + " / " + player.bonusRPTalentSixMax + "<br><span>" + player.goldBonusCount.toFixed(2) + " % Gold " + "<br> Cost: " + player.bonusRPTalentSixCost + "</span></p>"
-  );
+        player.reincarPoints -= player.bonusRPTalentSixCost;
+        player.bonusRPTalentSix++;
+
+
+        //Increase the cost to smooth leveling process
+        if(player.bonusRPTalentSix === 5){
+          player.bonusRPTalentSixCost++;
+        }
+        if(player.bonusRPTalentSix === 10){
+          player.bonusRPTalentSixCost++;
+        }
+        if(player.bonusRPTalentSix === 15){
+          player.bonusRPTalentSixCost++;
+        }
+        if(player.bonusRPTalentSix === 20){
+          player.bonusRPTalentSixCost++;
+        }
+
+
+
+      //Actual Talent Effect  
+      player.goldBonusCount += .02;  
+      }
+
+      //Section to visually show the updates
+      $("#talentTwoThree").html(
+        "<p class='talentTitle'>Bonus Gold % :<br>" + player.bonusRPTalentSix + " / " + player.bonusRPTalentSixMax + "<br><span>" + player.goldBonusCount.toFixed(2) + " % Gold " + "<br> Cost: " + player.bonusRPTalentSixCost + "</span></p>"
+      );
+   }
 }
 
 let talentOneSeven = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentSeven < player.bonusRPTalentSevenMax && player.bonusRPTalentSevenCost <= player.reincarPoints){
-    player.bonusRPTalentSeven++;
-    
-  //Actual Talent Effect 
-    player.reincarPoints -= player.bonusRPTalentSevenCost;
-    Dragonling.addDam += .5;
+  for(let x = 0; x < player.costMultiplier2; x++){  
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentSeven < player.bonusRPTalentSevenMax && player.bonusRPTalentSevenCost <= player.reincarPoints){
+      player.bonusRPTalentSeven++;
+
+    //Actual Talent Effect 
+      player.reincarPoints -= player.bonusRPTalentSevenCost;
+      Dragonling.addDam += 1;
+    }
+
+    //Section to visually show the updates
+    $("#talentThreeOne").html(
+      "<p class='talentTitle'>Dragonling Dam+ <br><span>" + player.bonusRPTalentSeven + " / " + player.bonusRPTalentSevenMax + "</span><br><span>+ " + Dragonling.addDam + "<br> Cost: " + player.bonusRPTalentSevenCost +"</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentThreeOne").html(
-    "<p class='talentTitle'>Dragonling Dam+ <br><span>" + player.bonusRPTalentSeven + " / " + player.bonusRPTalentSevenMax + "</span><br><span>+ " + Dragonling.addDam + "<br> Cost: " + player.bonusRPTalentSevenCost +"</span></p>"
-  ); 
-   
 }
 
 let talentOneEight = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentEight < player.bonusRPTalentEightMax && player.bonusRPTalentEightCost <= player.reincarPoints){
-    player.bonusRPTalentEight++;
-    
-  //Actual Talent Effect 
-    player.reincarPoints -= player.bonusRPTalentEightCost;
-    Dragonling.addSpeed += 10;
+  for(let x = 0; x < player.costMultiplier2; x++){ 
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentEight < player.bonusRPTalentEightMax && player.bonusRPTalentEightCost <= player.reincarPoints){
+      player.bonusRPTalentEight++;
+
+    //Actual Talent Effect 
+      player.reincarPoints -= player.bonusRPTalentEightCost;
+      Dragonling.addSpeed += 10;
+    }
+
+    //Section to visually show the updates
+    $("#talentThreeTwo").html(
+      "<p class='talentTitle'>Dragonling Spd+ <br><span>" + player.bonusRPTalentEight + " / " + player.bonusRPTalentEightMax + "</span><br><span>- " + (Dragonling.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentEightCost +"</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentThreeTwo").html(
-    "<p class='talentTitle'>Dragonling Spd+ <br><span>" + player.bonusRPTalentEight + " / " + player.bonusRPTalentEightMax + "</span><br><span>- " + (Dragonling.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentEightCost +"</span></p>"
-  ); 
-    
 }
 
 let talentOneNine = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentNine < player.bonusRPTalentNineMax && player.bonusRPTalentNineCost <= player.reincarPoints) {
-    
-    player.reincarPoints -= player.bonusRPTalentNineCost;
-    player.bonusRPTalentNine++;
-    
-    
-    //Increase the cost to smooth leveling process    
-    if(player.bonusRPTalentNine === 5){
-      player.bonusRPTalentNineCost++;
+  for(let x = 0; x < player.costMultiplier2; x++){ 
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentNine < player.bonusRPTalentNineMax && player.bonusRPTalentNineCost <= player.reincarPoints) {
+
+      player.reincarPoints -= player.bonusRPTalentNineCost;
+      player.bonusRPTalentNine++;
+
+
+      //Increase the cost to smooth leveling process    
+      if(player.bonusRPTalentNine === 5){
+        player.bonusRPTalentNineCost++;
+      }
+      if(player.bonusRPTalentNine === 10){
+        player.bonusRPTalentNineCost++;
+      }
+      if(player.bonusRPTalentNine === 15){
+        player.bonusRPTalentNineCost++;
+      }
+      if(player.bonusRPTalentNine === 20){
+        player.bonusRPTalentNineCost++;
+      }
+
+    //Actual Talent Effect
+    player.expBonusCount += .02;
     }
-    if(player.bonusRPTalentNine === 10){
-      player.bonusRPTalentNineCost++;
-    }
-    if(player.bonusRPTalentNine === 15){
-      player.bonusRPTalentNineCost++;
-    }
-    if(player.bonusRPTalentNine === 20){
-      player.bonusRPTalentNineCost++;
-    }
-    
-  //Actual Talent Effect
-  player.expBonusCount += .02;
+
+    //Section to visually show the updates
+    $("#talentThreeThree").html(
+      "<p class='talentTitle'>Increase Exp Gain: <br>" + player.bonusRPTalentNine + " / " + player.bonusRPTalentNineMax + "<br><span>" + player.expBonusCount.toFixed(2) + " x % EXP " + "<br> Cost: " + player.bonusRPTalentNineCost + "</span></p>"
+    );
   }
-  
-  //Section to visually show the updates
-  $("#talentThreeThree").html(
-    "<p class='talentTitle'>Increase Exp Gain: <br>" + player.bonusRPTalentNine + " / " + player.bonusRPTalentNineMax + "<br><span>" + player.expBonusCount.toFixed(2) + " x % EXP " + "<br> Cost: " + player.bonusRPTalentNineCost + "</span></p>"
-  );
 }
 
 let talentOneTen = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentTen < player.bonusRPTalentTenMax && player.bonusRPTalentTenCost <= player.reincarPoints){
-    player.bonusRPTalentTen++;
-    
-  //Actual Talent Effect  
-    player.reincarPoints -= player.bonusRPTalentTenCost;
-    ThunderSerpent.addDam += .5;
+  for(let x = 0; x < player.costMultiplier2; x++){ 
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentTen < player.bonusRPTalentTenMax && player.bonusRPTalentTenCost <= player.reincarPoints){
+      player.bonusRPTalentTen++;
+
+    //Actual Talent Effect  
+      player.reincarPoints -= player.bonusRPTalentTenCost;
+      ThunderSerpent.addDam += 1;
+    }
+
+    //Section to visually show the updates
+    $("#talentFourOne").html(
+      "<p class='talentTitle'>ThunderSerpent Dam+ <br><span>" + player.bonusRPTalentTen + " / " + player.bonusRPTalentTenMax + "</span><br><span>+ " + ThunderSerpent.addDam + "<br> Cost: " + player.bonusRPTalentTenCost +"</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentFourOne").html(
-    "<p class='talentTitle'>ThunderSerpent Dam+ <br><span>" + player.bonusRPTalentTen + " / " + player.bonusRPTalentTenMax + "</span><br><span>+ " + ThunderSerpent.addDam + "<br> Cost: " + player.bonusRPTalentTenCost +"</span></p>"
-  ); 
-  
 }
 
 let talentOneEleven = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentEleven < player.bonusRPTalentElevenMax && player.bonusRPTalentElevenCost <= player.reincarPoints){
-    player.bonusRPTalentEleven++;
-    
-  //Actual Talent Effect  
-    player.reincarPoints -= player.bonusRPTalentElevenCost;
-    ThunderSerpent.addSpeed += 10;
+  for(let x = 0; x < player.costMultiplier2; x++){ 
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentEleven < player.bonusRPTalentElevenMax && player.bonusRPTalentElevenCost <= player.reincarPoints){
+      player.bonusRPTalentEleven++;
+
+    //Actual Talent Effect  
+      player.reincarPoints -= player.bonusRPTalentElevenCost;
+      ThunderSerpent.addSpeed += 10;
+    }
+
+    //Section to visually show the updates
+    $("#talentFourTwo").html(
+      "<p class='talentTitle'>ThunderSerpent Spd+ <br><span>" + player.bonusRPTalentEleven + " / " + player.bonusRPTalentElevenMax + "</span><br><span>- " + (ThunderSerpent.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentElevenCost +"</span></p>"
+    ); 
   }
-  
-  //Section to visually show the updates
-  $("#talentFourTwo").html(
-    "<p class='talentTitle'>ThunderSerpent Spd+ <br><span>" + player.bonusRPTalentEleven + " / " + player.bonusRPTalentElevenMax + "</span><br><span>- " + (ThunderSerpent.addSpeed / 1000).toFixed(2) + " SPD" + "<br> Cost: " + player.bonusRPTalentElevenCost +"</span></p>"
-  ); 
-  
 }
 
 let talentOneTwelve = function(){
-  
-  //Check Talent for Max before adding to modifier
-  if(player.bonusRPTalentTwelve < player.bonusRPTalentTwelveMax && player.bonusRPTalentTwelveCost <= player.reincarPoints) {
-    
-    player.reincarPoints -= player.bonusRPTalentTwelveCost;
-    player.bonusRPTalentTwelveCost *= 3;
-    player.bonusRPTalentTwelve++;
-    
-    
-  //Actual Talent Effect  
-  enemy.toNextLevelMax--;  
+  for(let x = 0; x < player.costMultiplier2; x++){  
+    //Check Talent for Max before adding to modifier
+    if(player.bonusRPTalentTwelve < player.bonusRPTalentTwelveMax && player.bonusRPTalentTwelveCost <= player.reincarPoints) {
+
+      player.reincarPoints -= player.bonusRPTalentTwelveCost;
+      player.bonusRPTalentTwelveCost *= 3;
+      player.bonusRPTalentTwelve++;
+
+
+    //Actual Talent Effect  
+    enemy.toNextLevelMax--;  
+    }
+
+    //Section to visually show the updates
+    $("#talentFourThree").html(
+      "<p class='talentTitle'>Decrease Kills Needed : <br>" + player.bonusRPTalentTwelve + " / " + player.bonusRPTalentTwelveMax + "<br><span>" + enemy.toNextLevelMax + " Kills needed." + "<br> Cost: " + player.bonusRPTalentTwelveCost +"</span></p>"
+    );
   }
-  
-  //Section to visually show the updates
-  $("#talentFourThree").html(
-    "<p class='talentTitle'>Decrease Kills Needed : <br>" + player.bonusRPTalentTwelve + " / " + player.bonusRPTalentTwelveMax + "<br><span>" + enemy.toNextLevelMax + " Kills needed." + "<br> Cost: " + player.bonusRPTalentTwelveCost +"</span></p>"
-  );
-}
-
-let talentOneThirteen = function(){
-}
-
-let talentOneFourteen = function(){ 
-}
-
-let talentOneFifteen = function(){
 }
 
 
@@ -2187,10 +2213,10 @@ let talentOneFifteen = function(){
 */ 
 
 let saveGame = function(){
-  if(typeof(Storage) !== "undefined") {
-    //Note : I looked into using JSON but honestly it isn't needed for this minimal amount of saving
-    //In my next game I'll look at stringify and parse for objects save/load
   
+  if (typeof(Storage) !== "undefined") {
+    //NOTE: Learning more about Node.js so I can work on a cloud save system
+
     //Player - Core
     localStorage.playerTotalPets = player.totalPets;
     localStorage.playerGold = player.gold;
@@ -2203,39 +2229,39 @@ let saveGame = function(){
     localStorage.damageRP = player.damageIncreaseRP;
     localStorage.goldBonusCount = player.goldBonusCount;
     localStorage.expBonusCount = player.expBonusCount;
-		
+
     //Player - Talents
-		localStorage.bonusRPTalentOne = player.bonusRPTalentOne;
-		localStorage.bonusRPTalentOneCost = player.bonusRPTalentOneCost;
-		localStorage.bonusRPTalentTwo = player.bonusRPTalentTwo;
-		localStorage.bonusRPTalentTwoCost = player.bonusRPTalentTwoCost;
-		localStorage.bonusRPTalentThree = player.bonusRPTalentThree;
-		localStorage.bonusRPTalentThreeCost = player.bonusRPTalentThreeCost;
-		localStorage.bonusRPTalentFour = player.bonusRPTalentFour;
-		localStorage.bonusRPTalentFourCost = player.bonusRPTalentFourCost;
-		localStorage.bonusRPTalentFive = player.bonusRPTalentFive;
-		localStorage.bonusRPTalentFiveCost = player.bonusRPTalentFiveCost;
-		localStorage.bonusRPTalentSix = player.bonusRPTalentSix;
-		localStorage.bonusRPTalentSixCost = player.bonusRPTalentSixCost;
-		localStorage.bonusRPTalentSeven = player.bonusRPTalentSeven;
-		localStorage.bonusRPTalentSevenCost = player.bonusRPTalentSevenCost;
-		localStorage.bonusRPTalentEight = player.bonusRPTalentEight;
-		localStorage.bonusRPTalentEightCost = player.bonusRPTalentEightCost;
-		localStorage.bonusRPTalentNine = player.bonusRPTalentNine;
-		localStorage.bonusRPTalentNineCost = player.bonusRPTalentNineCost;
-		localStorage.bonusRPTalentTen = player.bonusRPTalentTen;
-		localStorage.bonusRPTalentTenCost = player.bonusRPTalentTenCost;
-		localStorage.bonusRPTalentEleven = player.bonusRPTalentEleven;
-		localStorage.bonusRPTalentElevenCost = player.bonusRPTalentElevenCost;
-		localStorage.bonusRPTalentTwelve = player.bonusRPTalentTwelve;
-		localStorage.bonusRPTalentTwelveCost = player.bonusRPTalentTwelveCost;
-		localStorage.bonusRPTalentThirteen = player.bonusRPTalentThirteen;
-		localStorage.bonusRPTalentThirteenCost = player.bonusRPTalentThirteenCost;
-		localStorage.bonusRPTalentFourteen = player.bonusRPTalentFourteen;
-		localStorage.bonusRPTalentFourteenCost = player.bonusRPTalentFourteenCost;
-		localStorage.bonusRPTalentFifteen = player.bonusRPTalentFifteen;
-		localStorage.bonusRPTalentFifteenCost = player.bonusRPTalentFifteenCost;
-    
+    localStorage.bonusRPTalentOne = player.bonusRPTalentOne;
+    localStorage.bonusRPTalentOneCost = player.bonusRPTalentOneCost;
+    localStorage.bonusRPTalentTwo = player.bonusRPTalentTwo;
+    localStorage.bonusRPTalentTwoCost = player.bonusRPTalentTwoCost;
+    localStorage.bonusRPTalentThree = player.bonusRPTalentThree;
+    localStorage.bonusRPTalentThreeCost = player.bonusRPTalentThreeCost;
+    localStorage.bonusRPTalentFour = player.bonusRPTalentFour;
+    localStorage.bonusRPTalentFourCost = player.bonusRPTalentFourCost;
+    localStorage.bonusRPTalentFive = player.bonusRPTalentFive;
+    localStorage.bonusRPTalentFiveCost = player.bonusRPTalentFiveCost;
+    localStorage.bonusRPTalentSix = player.bonusRPTalentSix;
+    localStorage.bonusRPTalentSixCost = player.bonusRPTalentSixCost;
+    localStorage.bonusRPTalentSeven = player.bonusRPTalentSeven;
+    localStorage.bonusRPTalentSevenCost = player.bonusRPTalentSevenCost;
+    localStorage.bonusRPTalentEight = player.bonusRPTalentEight;
+    localStorage.bonusRPTalentEightCost = player.bonusRPTalentEightCost;
+    localStorage.bonusRPTalentNine = player.bonusRPTalentNine;
+    localStorage.bonusRPTalentNineCost = player.bonusRPTalentNineCost;
+    localStorage.bonusRPTalentTen = player.bonusRPTalentTen;
+    localStorage.bonusRPTalentTenCost = player.bonusRPTalentTenCost;
+    localStorage.bonusRPTalentEleven = player.bonusRPTalentEleven;
+    localStorage.bonusRPTalentElevenCost = player.bonusRPTalentElevenCost;
+    localStorage.bonusRPTalentTwelve = player.bonusRPTalentTwelve;
+    localStorage.bonusRPTalentTwelveCost = player.bonusRPTalentTwelveCost;
+    localStorage.bonusRPTalentThirteen = player.bonusRPTalentThirteen;
+    localStorage.bonusRPTalentThirteenCost = player.bonusRPTalentThirteenCost;
+    localStorage.bonusRPTalentFourteen = player.bonusRPTalentFourteen;
+    localStorage.bonusRPTalentFourteenCost = player.bonusRPTalentFourteenCost;
+    localStorage.bonusRPTalentFifteen = player.bonusRPTalentFifteen;
+    localStorage.bonusRPTalentFifteenCost = player.bonusRPTalentFifteenCost;
+
     //Enemy
     localStorage.currentEnemyHealth = enemy.currentEnemyHealth;
     localStorage.maxEnemyHealth = enemy.maxEnemyHealth;
@@ -2244,7 +2270,7 @@ let saveGame = function(){
     localStorage.enemyToNextLevelMax = enemy.toNextLevelMax;
     localStorage.enemyLevel = enemy.level;
     localStorage.enemyGold = enemy.monsterGold;
-    
+
     //Skeleton
     localStorage.skeletonCount = Skeleton.count;
     localStorage.skeletonDamage = Skeleton.damage;
@@ -2256,7 +2282,7 @@ let saveGame = function(){
     localStorage.skeletonSkillFour = Skeleton.skill4;
     localStorage.skeletonSkillFive = Skeleton.skill5;
     localStorage.skeletonSkillSix = Skeleton.skill6;
-    
+
     //Frost Giant
     localStorage.frostGiantCount = FrostGiant.count;
     localStorage.frostGiantDamage = FrostGiant.damage;
@@ -2268,7 +2294,7 @@ let saveGame = function(){
     localStorage.frostGiantSkillFour = FrostGiant.skill4;
     localStorage.frostGiantSkillFive = FrostGiant.skill5;
     localStorage.frostGiantSkillSix = FrostGiant.skill6;
-    
+
     //Dragonling
     localStorage.dragonlingCount = Dragonling.count;
     localStorage.dragonlingDamage = Dragonling.damage;
@@ -2280,7 +2306,7 @@ let saveGame = function(){
     localStorage.dragonlingSkillFour = Dragonling.skill4;
     localStorage.dragonlingSkillFive = Dragonling.skill5;
     localStorage.dragonlingSkillSix = Dragonling.skill6;
-    
+
     //ThunderSerpent
     localStorage.thunderSerpentCount = ThunderSerpent.count;
     localStorage.thunderSerpentDamage = ThunderSerpent.damage;
@@ -2292,13 +2318,170 @@ let saveGame = function(){
     localStorage.thunderSerpentSkillFour = ThunderSerpent.skill4;
     localStorage.thunderSerpentSkillFive = ThunderSerpent.skill5;
     localStorage.thunderSerpentSkillSix = ThunderSerpent.skill6;
-  } 
-  else{
-      // If Storage === undefined then we know it isn't possible
-      // on this browser (via this technique)
+  }
+
+    else{
+    // If Storage === undefined then we know it isn't possible
+    // on this browser (via this technique)
     console.log("No local storage.");
   }
 }
+
+
+//This function will do the exact same thing as save, but automatically
+//It will check to see if autoSaveSelection is on first so we do not overwrite
+//the save game on accident!
+let autoSaveGame = function(){
+  
+  if (player.autoSaveSelection === 1){
+    
+    if (typeof(Storage) !== "undefined") {
+      //NOTE: Learning more about Node.js so I can work on a cloud save system
+
+      //Player - Core
+      localStorage.playerTotalPets = player.totalPets;
+      localStorage.playerGold = player.gold;
+      localStorage.playerLevel = player.level;
+      localStorage.playerMaxXp = player.maxXp;
+      localStorage.playerExp = player.exp;
+      localStorage.playerNextRP = player.nextReincarPoints;
+      localStorage.playerTotalOverallRP = player.totalOveralRP;
+      localStorage.playerRP = player.reincarPoints;
+      localStorage.damageRP = player.damageIncreaseRP;
+      localStorage.goldBonusCount = player.goldBonusCount;
+      localStorage.expBonusCount = player.expBonusCount;
+
+      //Player - Talents
+      localStorage.bonusRPTalentOne = player.bonusRPTalentOne;
+      localStorage.bonusRPTalentOneCost = player.bonusRPTalentOneCost;
+      localStorage.bonusRPTalentTwo = player.bonusRPTalentTwo;
+      localStorage.bonusRPTalentTwoCost = player.bonusRPTalentTwoCost;
+      localStorage.bonusRPTalentThree = player.bonusRPTalentThree;
+      localStorage.bonusRPTalentThreeCost = player.bonusRPTalentThreeCost;
+      localStorage.bonusRPTalentFour = player.bonusRPTalentFour;
+      localStorage.bonusRPTalentFourCost = player.bonusRPTalentFourCost;
+      localStorage.bonusRPTalentFive = player.bonusRPTalentFive;
+      localStorage.bonusRPTalentFiveCost = player.bonusRPTalentFiveCost;
+      localStorage.bonusRPTalentSix = player.bonusRPTalentSix;
+      localStorage.bonusRPTalentSixCost = player.bonusRPTalentSixCost;
+      localStorage.bonusRPTalentSeven = player.bonusRPTalentSeven;
+      localStorage.bonusRPTalentSevenCost = player.bonusRPTalentSevenCost;
+      localStorage.bonusRPTalentEight = player.bonusRPTalentEight;
+      localStorage.bonusRPTalentEightCost = player.bonusRPTalentEightCost;
+      localStorage.bonusRPTalentNine = player.bonusRPTalentNine;
+      localStorage.bonusRPTalentNineCost = player.bonusRPTalentNineCost;
+      localStorage.bonusRPTalentTen = player.bonusRPTalentTen;
+      localStorage.bonusRPTalentTenCost = player.bonusRPTalentTenCost;
+      localStorage.bonusRPTalentEleven = player.bonusRPTalentEleven;
+      localStorage.bonusRPTalentElevenCost = player.bonusRPTalentElevenCost;
+      localStorage.bonusRPTalentTwelve = player.bonusRPTalentTwelve;
+      localStorage.bonusRPTalentTwelveCost = player.bonusRPTalentTwelveCost;
+      localStorage.bonusRPTalentThirteen = player.bonusRPTalentThirteen;
+      localStorage.bonusRPTalentThirteenCost = player.bonusRPTalentThirteenCost;
+      localStorage.bonusRPTalentFourteen = player.bonusRPTalentFourteen;
+      localStorage.bonusRPTalentFourteenCost = player.bonusRPTalentFourteenCost;
+      localStorage.bonusRPTalentFifteen = player.bonusRPTalentFifteen;
+      localStorage.bonusRPTalentFifteenCost = player.bonusRPTalentFifteenCost;
+
+      //Enemy
+      localStorage.currentEnemyHealth = enemy.currentEnemyHealth;
+      localStorage.maxEnemyHealth = enemy.maxEnemyHealth;
+      localStorage.monsterExp = enemy.exp;
+      localStorage.enemyToNextLevel = enemy.toNextLevel;
+      localStorage.enemyToNextLevelMax = enemy.toNextLevelMax;
+      localStorage.enemyLevel = enemy.level;
+      localStorage.enemyGold = enemy.monsterGold;
+
+      //Skeleton
+      localStorage.skeletonCount = Skeleton.count;
+      localStorage.skeletonDamage = Skeleton.damage;
+      localStorage.skeletonCost = Skeleton.cost;
+      localStorage.skeletonLevel = Skeleton.level;
+      localStorage.skeletonSkillOne = Skeleton.skill1;
+      localStorage.skeletonSkillTwo = Skeleton.skill2;
+      localStorage.skeletonSkillThree = Skeleton.skill3;
+      localStorage.skeletonSkillFour = Skeleton.skill4;
+      localStorage.skeletonSkillFive = Skeleton.skill5;
+      localStorage.skeletonSkillSix = Skeleton.skill6;
+
+      //Frost Giant
+      localStorage.frostGiantCount = FrostGiant.count;
+      localStorage.frostGiantDamage = FrostGiant.damage;
+      localStorage.frostGiantCost = FrostGiant.cost;
+      localStorage.frostGiantLevel = FrostGiant.level;
+      localStorage.frostGiantSkillOne = FrostGiant.skill1;
+      localStorage.frostGiantSkillTwo = FrostGiant.skill2;
+      localStorage.frostGiantSkillThree = FrostGiant.skill3;
+      localStorage.frostGiantSkillFour = FrostGiant.skill4;
+      localStorage.frostGiantSkillFive = FrostGiant.skill5;
+      localStorage.frostGiantSkillSix = FrostGiant.skill6;
+
+      //Dragonling
+      localStorage.dragonlingCount = Dragonling.count;
+      localStorage.dragonlingDamage = Dragonling.damage;
+      localStorage.dragonlingCost = Dragonling.cost;
+      localStorage.dragonlingLevel = Dragonling.level;
+      localStorage.dragonlingSkillOne = Dragonling.skill1;
+      localStorage.dragonlingSkillTwo = Dragonling.skill2;
+      localStorage.dragonlingSkillThree = Dragonling.skill3;
+      localStorage.dragonlingSkillFour = Dragonling.skill4;
+      localStorage.dragonlingSkillFive = Dragonling.skill5;
+      localStorage.dragonlingSkillSix = Dragonling.skill6;
+
+      //ThunderSerpent
+      localStorage.thunderSerpentCount = ThunderSerpent.count;
+      localStorage.thunderSerpentDamage = ThunderSerpent.damage;
+      localStorage.thunderSerpentCost = ThunderSerpent.cost;
+      localStorage.thunderSerpentLevel = ThunderSerpent.level;
+      localStorage.thunderSerpentSkillOne = ThunderSerpent.skill1;
+      localStorage.thunderSerpentSkillTwo = ThunderSerpent.skill2;
+      localStorage.thunderSerpentSkillThree = ThunderSerpent.skill3;
+      localStorage.thunderSerpentSkillFour = ThunderSerpent.skill4;
+      localStorage.thunderSerpentSkillFive = ThunderSerpent.skill5;
+      localStorage.thunderSerpentSkillSix = ThunderSerpent.skill6;
+      
+      let date = new Date();
+      let a = date.getFullYear();
+      let b = date.getMonth() + 1;
+      let c = date.getDate();
+      let d = date.getHours();
+      let e = date.getMinutes();
+      let f = date.getSeconds();
+          
+      
+      document.getElementById('saveNoticeTwo').innerHTML = "Last Autosave: " + b + "/" + c + "/" + a + ": at " + d + ":" + e + ":" + f + " ";
+    }
+
+      else{
+      // If Storage === undefined then we know it isn't possible
+      // on this browser (via this technique)
+      console.log("No local storage.");
+    }
+  }
+}
+
+setInterval(autoSaveGame, 30000);
+
+let setAutoSave = function(){
+  if (player.autoSaveSelection === 0){
+    player.autoSaveSelection = 1;
+  }
+  
+  else {
+    player.autoSaveSelection = 0;
+  }
+}
+
+let checkAutoSave = function(){
+  if (player.autoSaveSelection === 1){
+    document.getElementById('saveNotice').innerHTML = "<p id='autoSaveOn'>Autosave: ON</p>";
+  }
+  if (player.autoSaveSelection === 0){
+    document.getElementById('saveNotice').innerHTML = "<p id='autoSaveOff'>Autosave: OFF</p>";
+  }
+}
+
+setInterval(checkAutoSave, 1000);
 
 let loadGame = function(){
   if(typeof(Storage) !== "undefined" && localStorage.playerTotalPets != null) { 
@@ -2319,20 +2502,11 @@ let loadGame = function(){
     let plRP = localStorage.getItem('playerRP');
       player.reincarPoints = parseFloat(plRP);
     let plTotalOveralRP = localStorage.getItem('playerTotalOverallRP');
-      player.totalOveralRP = parseFloat(plTotalOveralRP);
-    
-    //For testing a rare loading bug with player.damageIncreaseRP
-    //TODO: Possibly solved but test more!
-    //console.log('RP Before:' + player.damageIncreaseRP);
-    
+      player.totalOveralRP = parseFloat(plTotalOveralRP);  
     let pldamageRP = localStorage.getItem('damageRP');
-    
-        //console.log('pldamageRP Before:' + pldamageRP);
-    
+    //console.log('pldamageRP Before:' + pldamageRP);
     player.damageIncreaseRP = parseFloat(pldamageRP);
-    
     //console.log('RP After:' + player.damageIncreaseRP);
-    
 		let goldBonusCount = localStorage.getItem('goldBonusCount');
 			player.goldBonusCount = parseFloat(goldBonusCount);
 		let expBonusCount = localStorage.getItem('expBonusCount');
@@ -2427,7 +2601,7 @@ let loadGame = function(){
     let skLevel = localStorage.getItem('skeletonLevel');
       Skeleton.level = parseFloat(skLevel);
     
-    //Had to parse these strings below //Research why below is a string and above is an int?
+    //Skeleton 
     let skS1 = localStorage.getItem('skeletonSkillOne');
       Skeleton.skill1 = parseFloat(skS1);
     let skS2 = localStorage.getItem('skeletonSkillTwo');
@@ -2451,7 +2625,7 @@ let loadGame = function(){
     let frLevel = localStorage.getItem('frostGiantLevel');
       FrostGiant.level = parseFloat(frLevel);
     
-    //Had to parse these strings below
+    //FrostGiant
     let frS1 = localStorage.getItem('frostGiantSkillOne');
       FrostGiant.skill1 = parseFloat(frS1);
     let frS2 = localStorage.getItem('frostGiantSkillTwo');
@@ -2475,6 +2649,7 @@ let loadGame = function(){
     let dkLevel = localStorage.getItem('dragonlingLevel');
       Dragonling.level = parseFloat(dkLevel);
 
+    //Dragonling
     let dkS1 = localStorage.getItem('dragonlingSkillOne');
       Dragonling.skill1 = parseFloat(dkS1);
     let dkS2 = localStorage.getItem('dragonlingSkillTwo');
@@ -2498,6 +2673,7 @@ let loadGame = function(){
     let tsLevel = localStorage.getItem('thunderSerpentLevel');
       ThunderSerpent.level = parseFloat(tsLevel);
 
+    //ThunderSerpent
     let tsS1 = localStorage.getItem('thunderSerpentSkillOne');
       ThunderSerpent.skill1 = parseFloat(tsS1);
     let tsS2 = localStorage.getItem('thunderSerpentSkillTwo');
@@ -2527,45 +2703,59 @@ let loadGame = function(){
 * Ex. 1000000 will read 1.00m or 1.0m
 *
 */
-
-
 function nFormatter(num) {
-    if (num >= 1000000000000000000000000000000000000) {
-            return (num / 1000000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'l';
+    if (num >= 1e51) {
+            return (num / 1e51).toFixed(2).replace(/\.0$/, '') + 'SD';
+    } 
+    if (num >= 1e48) {
+            return (num / 1e48).toFixed(2).replace(/\.0$/, '') + 'Q3';
       } 
-    if (num >= 1000000000000000000000000000000000) {
-            return (num / 1000000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'k';
+    if (num >= 1e45) {
+            return (num / 1e45).toFixed(2).replace(/\.0$/, '') + 'Q2';
       } 
-    if (num >= 1000000000000000000000000000000) {
-            return (num / 1000000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'j';
+    if (num >= 1e42) {
+            return (num / 1e42).toFixed(2).replace(/\.0$/, '') + 'T';
       } 
-    if (num >= 1000000000000000000000000000) {
-            return (num / 1000000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'i';
+    if (num >= 1e39) {
+          return (num / 1e39).toFixed(2).replace(/\.0$/, '') + 'D';
+    } 
+    if (num >= 1e36) {
+            return (num / 1e36).toFixed(2).replace(/\.0$/, '') + 'u';
       } 
-    if (num >= 1000000000000000000000000) {
-            return (num / 1000000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'h';
+    if (num >= 1e33) {
+            return (num / 1e33).toFixed(2).replace(/\.0$/, '') + 'd';
       } 
-    if (num >= 1000000000000000000000) {
-        return (num / 1000000000000000000000).toFixed(2).replace(/\.0$/, '') + 'g';
+    if (num >= 1e30) {
+            return (num / 1e30).toFixed(2).replace(/\.0$/, '') + 'n';
       } 
-    if (num >= 1000000000000000000) {
-        return (num / 1000000000000000000).toFixed(2).replace(/\.0$/, '') + 'f';
+    if (num >= 1e27) {
+            return (num / 1e27).toFixed(2).replace(/\.0$/, '') + 'o';
       } 
-    if (num >= 1000000000000000) {
-        return (num / 1000000000000000).toFixed(2).replace(/\.0$/, '') + 'e';
+    if (num >= 1e24) {
+            return (num / 1e24).toFixed(2).replace(/\.0$/, '') + 'S';
       } 
-    if(num >= 1000000000000) {
-        return (num / 1000000000000).toFixed(2).replace(/\.0$/, '') + 'Q';
+    if (num >= 1e21) {
+        return (num / 1e21).toFixed(2).replace(/\.0$/, '') + 's';
+      } 
+    if (num >= 1e18) {
+        return (num / 1e18).toFixed(2).replace(/\.0$/, '') + 'Q';
+      } 
+    if (num >= 1e15) {
+        return (num / 1e15).toFixed(2).replace(/\.0$/, '') + 'q';
+      } 
+    if(num >= 1e12) {
+        return (num / 1e12).toFixed(2).replace(/\.0$/, '') + 't';
       }  
-    if(num >= 1000000000) {
-        return (num / 1000000000).toFixed(2).replace(/\.0$/, '') + 'b';
+    if(num >= 1e9) {
+        return (num / 1e9).toFixed(2).replace(/\.0$/, '') + 'b';
       }
-    if(num >= 1000000) {
-        return (num / 1000000).toFixed(2).replace(/\.0$/, '') + 'm';
+    if(num >= 1e6) {
+        return (num / 1e6).toFixed(2).replace(/\.0$/, '') + 'm';
      }
-    if(num >= 1000) {
-        return (num / 1000).toFixed(2).replace(/\.0$/, '') + 'k';
+    if(num >= 1e3) {
+        return (num / 1e3).toFixed(2).replace(/\.0$/, '') + 'k';
      }
+  
      return num;
 }
 
@@ -2726,7 +2916,7 @@ let reincarnation = function() {
   
   //Certain player stats that need to be reset 
   player.totalPets = 0;     
-  player.gold = 25;          
+  player.gold = 28;          
   player.level = 1;         
   player.exp = 1;           
   player.maxXp = 5;
@@ -2738,7 +2928,6 @@ let reincarnation = function() {
   enemy.monsterGold = 1;
   enemy.exp = 1;
   enemy.toNextLevel = 1;
-  enemy.toNextLevelMax = 10;
   enemy.level = 1;
 
   //Skeleton
@@ -2905,34 +3094,6 @@ let resetRP = function(){
   talentTreeInitialDescriptions();
 }
 
-//Sets background for RP Section
-let backgroundRPCheck = function(){
-  
-  //Check Total RP count in order to set background
-  if(player.totalOveralRP >= 0 && player.totalOveralRP < 1){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-none-activated.png')";
-  }
-  if(player.totalOveralRP >= 1 && player.totalOveralRP < 25){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-1-activated.png')";
-  }
-  if(player.totalOveralRP >= 25 && player.totalOveralRP < 125){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-2-activated.png')";
-  }
-  if(player.totalOveralRP >= 125 && player.totalOveralRP < 1000){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-3-activated.png')";
-  }
-  if(player.totalOveralRP >= 1000 && player.totalOveralRP < 5000){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-4-activated.png')";
-  }
-  if(player.totalOveralRP >= 5000 && player.totalOveralRP < 15000){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-5-activated.png')";
-  }
-  if(player.totalOveralRP >= 15000){
-        document.getElementById("reincarnationPointsSection").style.backgroundImage = "url('images/background-rp-6-activated.png')";
-  }
-}
-
-setInterval(backgroundRPCheck, 500);
 
 /* Display Next RP Points */
 let checkNextRP = function(){
@@ -3016,6 +3177,81 @@ let costMultiplyFive = function(){
   document.getElementById("costMultiplierFive").style.color = "red";
 }
 
+/*
+*
+* Cost and Level Multiplier - Purchasing Multiple Minions
+* This section is for the inside of the talent menus
+*
+*/
+
+let costMultiplyOne2 = function(){
+  player.costMultiplier2 = 1;
+  document.getElementById("costMultiplierOne2").style.borderColor = "red";
+  document.getElementById("costMultiplierOne2").style.color = "red";
+  document.getElementById("costMultiplierTwo2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierTwo2").style.color = "#fff";
+  document.getElementById("costMultiplierThree2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierThree2").style.color = "#fff";
+  document.getElementById("costMultiplierFour2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFour2").style.color = "#fff";
+  document.getElementById("costMultiplierFive2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFive2").style.color = "#fff";
+}
+
+let costMultiplyTwo2 = function(){
+  player.costMultiplier2 = 10;  
+  document.getElementById("costMultiplierOne2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierOne2").style.color = "#fff";
+  document.getElementById("costMultiplierTwo2").style.borderColor = "red";
+  document.getElementById("costMultiplierTwo2").style.color = "red";
+  document.getElementById("costMultiplierThree2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierThree2").style.color = "#fff";
+  document.getElementById("costMultiplierFour2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFour2").style.color = "#fff";
+  document.getElementById("costMultiplierFive2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFive2").style.color = "#fff";
+}
+let costMultiplyThree2 = function(){
+  player.costMultiplier2 = 25;
+  document.getElementById("costMultiplierOne2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierOne2").style.color = "#fff";
+  document.getElementById("costMultiplierTwo2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierTwo2").style.color = "#fff";
+  document.getElementById("costMultiplierThree2").style.borderColor = "red";
+  document.getElementById("costMultiplierThree2").style.color = "red";
+  document.getElementById("costMultiplierFour2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFour2").style.color = "#fff";
+  document.getElementById("costMultiplierFive2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFive2").style.color = "#fff";
+}
+
+let costMultiplyFour2 = function(){
+  player.costMultiplier2 = 100; 
+  document.getElementById("costMultiplierOne2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierOne2").style.color = "#fff";
+  document.getElementById("costMultiplierTwo2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierTwo2").style.color = "#fff";
+  document.getElementById("costMultiplierThree2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierThree2").style.color = "#fff";
+  document.getElementById("costMultiplierFour2").style.borderColor = "red";
+  document.getElementById("costMultiplierFour2").style.color = "red";
+  document.getElementById("costMultiplierFive2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFive2").style.color = "#fff";
+}
+
+let costMultiplyFive2 = function(){
+  player.costMultiplier2 = 1000;  
+  document.getElementById("costMultiplierOne2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierOne2").style.color = "#fff";
+  document.getElementById("costMultiplierTwo2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierTwo2").style.color = "#fff";
+  document.getElementById("costMultiplierThree2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierThree2").style.color = "#fff";
+  document.getElementById("costMultiplierFour2").style.borderColor = "#fff";
+  document.getElementById("costMultiplierFour2").style.color = "#fff";
+  document.getElementById("costMultiplierFive2").style.borderColor = "red";
+  document.getElementById("costMultiplierFive2").style.color = "red";
+}
 
 
 //TODO - Credit Section (links below)
